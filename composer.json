@@ -1,0 +1,36 @@
+{
+  "name": "lucatume/idlikethis",
+  "description": "Add an \"I'd like this\" button anywhere.",
+  "type": "wordpress-plugin",
+  "license": "GPL 2.0",
+  "authors": [
+    {
+      "name": "Luca Tumedei",
+      "email": "luca@theaveragedev.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "lucatume/di52": "dev-master",
+    "smarty/smarty": "^3.1"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ],
+    "post-update-cmd": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ],
+    "post-autoload-dump": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ]
+  },
+  "require-dev": {
+    "lucatume/wp-browser": "^1.9"
+  },
+  "autoload": {
+    "psr-0": {
+      "idlikethis_": "src/"
+    }
+  }
+}
