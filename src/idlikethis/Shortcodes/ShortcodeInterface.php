@@ -5,9 +5,12 @@ interface idlikethis_Shortcodes_ShortcodeInterface
     /**
      * Returns the shortcode rendered markup code.
      *
+     * @param string|array $attributes An array of shortcode attributes.
+     * @param string $content The shortcode content.
+     *
      * @return string
      */
-    public function render();
+    public function render($attributes = array(), $content = '');
 
     /**
      * Returns the shortcode tag.

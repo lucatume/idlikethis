@@ -49,9 +49,12 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
     /**
      * Returns the shortcode rendered markup code.
      *
+     * @param string|array $attributes An array of shortcode attributes.
+     * @param string $content The shortcode content.
+     *
      * @return string
      */
-    public function render()
+    public function render($attributes = array(), $content = '')
     {
         return $this->render_engine->render($this->template_slug, $this->template_data);
     }
