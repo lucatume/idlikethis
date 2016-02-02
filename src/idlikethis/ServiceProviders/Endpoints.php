@@ -10,7 +10,10 @@ class idlikethis_ServiceProviders_Endpoints extends tad_DI52_ServiceProvider
     {
         $this->container->set_var('endpoints-namespace', 'idlikethis/v1');
 
+        $this->container->singleton('idlikethis_Endpoints_AuthHandlerInterface', 'idlikethis_Endpoints_AuthHandler');
+        $this->container->singleton('idlikethis_Repositories_CommentsRepositoryInterface', 'idlikethis_Repositories_CommentsRepository');
         $this->container->singleton('idlikethis_Endpoints_ButtonClickHandlerInterface', 'idlikethis_Endpoints_ButtonClickHandler');
+
 
         add_action('rest_api_init', array($this, 'register_endpoints'));
     }

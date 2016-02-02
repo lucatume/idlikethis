@@ -1,0 +1,138 @@
+<?php
+namespace idlikethis\Endpoints;
+
+use idlikethis_Endpoints_ButtonClickHandler as ButtonClickHandler;
+use Prophecy\Argument;
+
+class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
+{
+
+    /**
+     * @var \idlikethis_Endpoints_AuthHandlerInterface
+     */
+    protected $auth_handler;
+
+    /**
+     * @var \idlikethis_Repositories_CommentsRepositoryInterface
+     */
+    protected $comment_repository;
+
+
+    public function setUp()
+    {
+        // before
+        parent::setUp();
+
+        // your set up methods here
+        $this->auth_handler = $this->prophesize('idlikethis_Endpoints_AuthHandlerInterface');
+        $this->comment_repository = $this->prophesize('idlikethis_Repositories_CommentsRepositoryInterface');
+    }
+
+    public function tearDown()
+    {
+        // your tear down methods here
+
+        // then
+        parent::tearDown();
+    }
+
+    /**
+     * @test
+     * it should be instantiatable
+     */
+    public function it_should_be_instantiatable()
+    {
+        $sut = $this->make_instance();
+    }
+
+    /**
+     * @test
+     * it should return 403 response if verification fails
+     */
+    public function it_should_return_403_response_if_verification_fails()
+    {
+        $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(false);
+
+        $sut = $this->make_instance();
+
+        $out = $sut->handle();
+
+        $this->assertErrorResponse(403, $out);
+    }
+
+    /**
+     * @test
+     * it should return 400 response if request is missing post id
+     */
+    public function it_should_return_400_response_if_request_is_missing_post_id()
+    {
+        $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
+        $_POST['content'] = 'foo';
+
+        $sut = $this->make_instance();
+
+        $out = $sut->handle();
+
+        $this->assertErrorResponse(400, $out);
+    }
+
+    /**
+     * @test
+     * it should return 400 status if request is missing content
+     */
+    public function it_should_return_400_status_if_request_is_missing_content()
+    {
+        $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
+        $_POST['post_id'] = 123;
+
+        $sut = $this->make_instance();
+
+        $out = $sut->handle();
+
+        $this->assertErrorResponse(400, $out);
+    }
+
+    /**
+     * @test
+     * it should return 400 response if comment insertion fails
+     */
+    public function it_should_return_400_response_if_comment_insertion_fails()
+    {
+        $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
+        $this->comment_repository->add_for_post(Argument::any(), Argument::any())->willReturn(false);
+        $_POST['post_id'] = 123;
+        $_POST['content'] = 'foo';
+
+        $sut = $this->make_instance();
+
+        $out = $sut->handle();
+
+        $this->assertErrorResponse(400, $out);
+    }
+
+    /**
+     * @test
+     * it should return 200 response if comment insertion succeeds
+     */
+    public function it_should_return_200_response_if_comment_insertion_succeeds()
+    {
+        $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
+        $this->comment_repository->add_for_post(Argument::any(), Argument::any())->willReturn(112);
+        $_POST['post_id'] = 123;
+        $_POST['content'] = 'foo';
+
+        $sut = $this->make_instance();
+
+        /** @var \WP_REST_Response $out */
+        $out = $sut->handle();
+
+        $this->assertEquals(200, $out->status);
+        $this->assertEquals(112, $out->data);
+    }
+
+    protected function make_instance()
+    {
+        return new ButtonClickHandler($this->auth_handler->reveal(), $this->comment_repository->reveal());
+    }
+
+}
