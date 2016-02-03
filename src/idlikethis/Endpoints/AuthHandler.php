@@ -12,6 +12,14 @@ class idlikethis_Endpoints_AuthHandler implements idlikethis_Endpoints_AuthHandl
      */
     public function verify_auth(array $data, $action)
     {
-        return wp_verify_nonce($data['auth'], $action);
+        if (!is_string($action)) {
+            throw new InvalidArgumentException('Action must be a string');
+        }
+
+        if (empty($data['auth'])) {
+            return false;
+        }
+
+        return (bool)wp_verify_nonce($data['auth'], $action);
     }
 }
