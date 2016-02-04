@@ -61,7 +61,7 @@ class PluginTest extends \Codeception\TestCase\WPTestCase
 
         $out = $sut->dir_path('some/frag.extension');
 
-        $this->assertEquals(plugin_dir_path($this->root_dir) . 'some/frag.extension/', $out);
+        $this->assertEquals(plugin_dir_path($this->root_dir) . 'some/frag.extension', $out);
     }
 
     /**
@@ -87,7 +87,7 @@ class PluginTest extends \Codeception\TestCase\WPTestCase
 
         $out = $sut->dir_url('some/frag.extension');
 
-        $this->assertEquals(plugin_dir_url($this->root_dir) . 'some/frag.extension/', $out);
+        $this->assertEquals(plugin_dir_url($this->root_dir) . 'some/frag.extension', $out);
     }
 
     private function make_instance()

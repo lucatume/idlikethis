@@ -29,7 +29,7 @@ class idlikethis_Plugin
         if (!is_string($frag)) {
             throw new InvalidArgumentException('Frag must be a string');
         }
-        return $this->dir_path . trailingslashit(ltrim($frag, DIRECTORY_SEPARATOR));
+        return $this->dir_path . ltrim($frag, DIRECTORY_SEPARATOR);
     }
 
     public function dir_url($frag)
@@ -41,6 +41,6 @@ class idlikethis_Plugin
         if (!is_string($frag)) {
             throw new InvalidArgumentException('Frag must be a string');
         }
-        return $this->dir_url . trailingslashit(ltrim($frag, DIRECTORY_SEPARATOR));
+        return $this->dir_url . ltrim($frag, DIRECTORY_SEPARATOR);
     }
 }
