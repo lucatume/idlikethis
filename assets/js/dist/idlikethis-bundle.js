@@ -44,20 +44,24 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(1);
+	(function () {
+	    __webpack_require__(1);
 
-	var Backbone = __webpack_require__(5),
-	    $ = __webpack_require__(7),
-	    idlikethis_ButtonView = __webpack_require__(8);
+	    __webpack_require__(5);
+	    __webpack_require__(6);
 
-	function idlikethis_bootstrap() {
-	    // create a Backbone view on each button
-	    $('.idlikethis-button').each(function (button) {
-	        new idlikethis_ButtonView({ el: button });
-	    });
-	};
+	    var idlikethis = __webpack_require__(7),
+	        $ = __webpack_require__(9);
 
-	$(idlikethis_bootstrap);
+	    function bootstrap() {
+	        // create a Backbone view on each button
+	        $('.idlikethis-button').each(function (button) {
+	            new idlikethis.Views.Button({ el: button });
+	        });
+	    };
+
+	    $(bootstrap);
+	})();
 
 /***/ },
 /* 1 */
@@ -414,15 +418,24 @@
 /***/ function(module, exports) {
 
 	// provided by WordPress
-	module.exports = window.Backbone;
+	module.exports = window._;
 
 /***/ },
-/* 6 */,
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	// provided by WordPress
-	module.exports = window.jQuery;
+	module.exports = window.Backbone;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	    Views: {
+	        Button: __webpack_require__(8)
+	    }
+	};
 
 /***/ },
 /* 8 */
@@ -430,9 +443,16 @@
 
 	module.exports = Backbone.View.extend({
 	    initialize: function () {
-	        console.log('initialized');
+	        console.log('Button initialized');
 	    }
 	});
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	// provided by WordPress
+	module.exports = window.jQuery;
 
 /***/ }
 /******/ ]);

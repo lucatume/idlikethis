@@ -1,5 +1,5 @@
 module.exports = Backbone.View.extend({
     initialize: function () {
-        console.log('initialized');
+        console.log('Button initialized');
     }
 });
