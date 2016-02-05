@@ -1,0 +1,6 @@
+<?php
+
+interface idlikethis_Scripts_FrontEndDataProviderInterface extends idlikethis_Scripts_DataProviderInterface
+{
+
+}

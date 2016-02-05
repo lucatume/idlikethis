@@ -23,10 +23,16 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
     protected $text_provider;
 
     /**
+     * @var idlikethis_Contexts_ContextInterface
+     */
+    protected $context;
+
+    /**
      * @param idlikethis_Templates_RenderEngineInterface $render_engine
      * @param idlikethis_Texts_ProviderInterface $text_provider
+     * @param idlikethis_Contexts_ShortcodeContextInterface $context
      */
-    public function __construct(idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_ProviderInterface $text_provider)
+    public function __construct(idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_ProviderInterface $text_provider, idlikethis_Contexts_ShortcodeContextInterface $context)
     {
         $this->render_engine = $render_engine;
         $this->template_slug = 'shortcodes/simple';
@@ -34,6 +40,7 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
         $this->template_data = array(
             'text' => $this->text_provider->get_button_text(),
         );
+        $this->context = $context;
     }
 
     /**
@@ -56,7 +63,11 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
      */
     public function render($attributes = array(), $content = '')
     {
-        return $this->render_engine->render($this->template_slug, $this->template_data);
+        $data = $this->template_data;
+        $data['comment_text'] = $this->context->get_comment_text();
+        $data['post_id'] = $this->context->get_post_id();
+
+        return $this->render_engine->render($this->template_slug, $data);
     }
 
     /**
