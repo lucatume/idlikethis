@@ -55,7 +55,7 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
         $sut = $this->make_instance();
 
-        $out = $sut->handle();
+        $out = $sut->handle(new \WP_REST_Request('create', '/some-path', ['post_id' => 123, 'content' => 'foo']));
 
         $this->assertErrorResponse(403, $out);
     }
@@ -71,7 +71,7 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
         $sut = $this->make_instance();
 
-        $out = $sut->handle();
+        $out = $sut->handle(new \WP_REST_Request('create', '/some-path', ['content' => 'foo']));
 
         $this->assertErrorResponse(400, $out);
     }
@@ -83,11 +83,10 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     public function it_should_return_400_status_if_request_is_missing_content()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $_POST['post_id'] = 123;
 
         $sut = $this->make_instance();
 
-        $out = $sut->handle();
+        $out = $sut->handle(new \WP_REST_Request('create', '/some-path', ['post_id' => 123]));
 
         $this->assertErrorResponse(400, $out);
     }
@@ -100,12 +99,10 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
         $this->comment_repository->add_for_post(Argument::any(), Argument::any())->willReturn(false);
-        $_POST['post_id'] = 123;
-        $_POST['content'] = 'foo';
 
         $sut = $this->make_instance();
 
-        $out = $sut->handle();
+        $out = $sut->handle(new \WP_REST_Request('create', '/some-path', ['post_id' => 123, 'content' => 'foo']));
 
         $this->assertErrorResponse(400, $out);
     }
@@ -118,13 +115,14 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
         $this->comment_repository->add_for_post(Argument::any(), Argument::any())->willReturn(112);
-        $_POST['post_id'] = 123;
-        $_POST['content'] = 'foo';
 
         $sut = $this->make_instance();
 
         /** @var \WP_REST_Response $out */
-        $out = $sut->handle();
+        $request = new \WP_REST_Request();
+        $request->set_param('post_id', 123);
+        $request->set_param('content', 'some content');
+        $out = $sut->handle($request);
 
         $this->assertEquals(200, $out->status);
         $this->assertEquals(112, $out->data);

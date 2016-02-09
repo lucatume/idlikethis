@@ -15,7 +15,7 @@ class idlikethis_ServiceProviders_Shortcodes extends tad_DI52_ServiceProvider
 
         $smarty = new Smarty();
         $smarty->setTemplateDir($templates_dir);
-        $smarty->setCacheDir($templates_dir . '_cache');
+        $smarty->setCacheDir($templates_dir . DIRECTORY_SEPARATOR . '_cache');
         $this->container->singleton('Smarty', $smarty);
 
         $this->container->singleton('idlikethis_Templates_RenderEngineInterface', 'idlikethis_Adapters_SmartyAdapter');

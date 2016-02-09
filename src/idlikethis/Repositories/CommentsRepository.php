@@ -33,6 +33,7 @@ class idlikethis_Repositories_CommentsRepository implements idlikethis_Repositor
             'comment_content' => count($comments) . ' - ' . $content,
             'comment_type' => 'idlikethis',
             'user_id' => get_current_user_id(),
+            'comment_approved' => 1,
         );
 
         return wp_new_comment($comment_data);

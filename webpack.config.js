@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
     entry: './assets/js/idlikethis.js',
     output: {filename: './assets/js/dist/idlikethis-bundle.js'},
@@ -7,5 +9,11 @@ module.exports = {
             {test: /\.css$/, loader: 'style!css'},
             {test: /\.scss$/, loaders: ['style', 'css', 'sass']}
         ]
+    },
+    resolve: {
+        root: [
+            path.resolve('./assets/js/modules'),
+        ],
+        extensions: ['', '.js'],
     }
 };

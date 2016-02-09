@@ -4,22 +4,25 @@ class idlikethis_Endpoints_AuthHandler implements idlikethis_Endpoints_AuthHandl
 {
 
     /**
+     * @var string
+     */
+    protected $action;
+
+    /**
+     * @var int
+     */
+    protected $user_id;
+
+    /**
      * Verifies an action is authorized.
      *
-     * @param array $data An array of data that should store the authorization method.
+     * @param WP_REST_Request $request The request representation.
      * @param string $action The action the auth refers to.
      * @return bool
      */
-    public function verify_auth(array $data, $action)
+    public function verify_auth(WP_REST_Request $request, $action)
     {
-        if (!is_string($action)) {
-            throw new InvalidArgumentException('Action must be a string');
-        }
-
-        if (empty($data['auth'])) {
-            return false;
-        }
-
-        return (bool)wp_verify_nonce($data['auth'], $action);
+        // we are satisfied with the nonce verification the REST API will make
+        return true;
     }
 }

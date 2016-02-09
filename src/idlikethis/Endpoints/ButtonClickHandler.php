@@ -23,25 +23,26 @@ class idlikethis_Endpoints_ButtonClickHandler implements idlikethis_Endpoints_Bu
      *
      * @return bool `true` if the request was successfully handled, `false` otherwise.
      */
-    public function handle()
+    public function handle(WP_REST_Request $request)
     {
         $headers = array();
 
-        if (!$this->auth_handler->verify_auth($_POST, 'button-click')) {
+        if (!$this->auth_handler->verify_auth($request, 'button-click')) {
             return new WP_REST_Response('Invalid auth', 403, $headers);
         }
 
-        if (empty($_POST['post_id']) || empty($_POST['content'])) {
+        $post_id = $request->get_param('post_id');
+        $content = $request->get_param('content');
+
+        if (empty($post_id) || empty($content)) {
             return new WP_REST_Response('Missing data', 400, $headers);
         }
-        $post_id = $_POST['post_id'];
-        $content = $_POST['content'];
 
-        $exit = $this->comments_repository->add_for_post($post_id, $content);
+        $comment_id = $this->comments_repository->add_for_post($post_id, $content);
 
-        $message = empty($exit) ? 'Could not register click' : $exit;
-        $status = empty($exit) ? 400 : 200;
+        $message = empty($comment_id) ? 'Could not register click' : $comment_id;
+        $status = empty($comment_id) ? 400 : 200;
 
-        return new WP_REST_Response($exit, $status, $headers);
+        return new WP_REST_Response($comment_id, $status, $headers);
     }
 }

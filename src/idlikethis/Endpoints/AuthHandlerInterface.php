@@ -6,9 +6,9 @@ interface idlikethis_Endpoints_AuthHandlerInterface
     /**
      * Verifies an action is authorized.
      *
-     * @param array $data An array of data that should store the authorization method.
+     * @param WP_REST_Request $request The request representation.
      * @param string $action The action the auth refers to.
      * @return bool
      */
-    public function verify_auth(array $data, $action);
+    public function verify_auth(WP_REST_Request $request, $action);
 }

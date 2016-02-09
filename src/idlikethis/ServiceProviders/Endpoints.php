@@ -22,7 +22,7 @@ class idlikethis_ServiceProviders_Endpoints extends tad_DI52_ServiceProvider
     {
         $namespace = $this->container->get_var('endpoints-namespace');
 
-        register_rest_route($namespace, '/button-click/', array(
+        register_rest_route($namespace, '/button-click', array(
             'methods' => 'POST',
             'callback' => array($this->container->make('idlikethis_Endpoints_ButtonClickHandlerInterface'), 'handle'),
         ));

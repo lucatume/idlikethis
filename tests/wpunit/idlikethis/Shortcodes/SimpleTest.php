@@ -15,6 +15,11 @@ class SimpleTest extends \Codeception\TestCase\WPTestCase
      */
     protected $text_provider;
 
+    /**
+     * @var \idlikethis_Contexts_ShortcodeContextInterface
+     */
+    protected $context;
+
     public function setUp()
     {
         // before
@@ -23,6 +28,7 @@ class SimpleTest extends \Codeception\TestCase\WPTestCase
         // your set up methods here
         $this->render_engine = $this->prophesize('idlikethis_Templates_RenderEngineInterface');
         $this->text_provider = $this->prophesize('idlikethis_Texts_ProviderInterface');
+        $this->context = $this->prophesize('idlikethis_Contexts_ShortcodeContextInterface');
     }
 
     public function tearDown()
@@ -35,7 +41,7 @@ class SimpleTest extends \Codeception\TestCase\WPTestCase
 
     protected function make_instance()
     {
-        return new Simple($this->render_engine->reveal(), $this->text_provider->reveal());
+        return new Simple($this->render_engine->reveal(), $this->text_provider->reveal(), $this->context->reveal());
     }
 
     /**
@@ -55,8 +61,12 @@ class SimpleTest extends \Codeception\TestCase\WPTestCase
     public function it_should_call_the_render_engine_with_data_when_rendering()
     {
         $sut = $this->make_instance();
+
+        $this->context->get_comment_text()->willReturn('some text');
+        $this->context->get_post_id()->willReturn(23);
+
+        $data = array('some' => 'value', 'some_other' => 'value', 'comment_text' => 'some text', 'post_id' => 23);
         $sut->set_template_slug('some/slug');
-        $data = array('some' => 'value', 'some_other' => 'value');
         $sut->set_template_data($data);
 
         $this->render_engine->render('some/slug', $data)->shouldBeCalled();

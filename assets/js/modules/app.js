@@ -1,5 +1,9 @@
 module.exports = {
+    data: window.idlikethisData || {},
     Views: {
-        Button: require('./views/Button.js')
+        Button: require('views/Button'),
+    },
+    Models: {
+        VoteCaster: require('models/VoteCaster'),
     }
 };

@@ -33,64 +33,16 @@ class ButtonClickPostRequestTest extends \Codeception\TestCase\WPTestCase
 
     /**
      * @test
-     * it should not insert any comment if auth is not set in POST request
-     */
-    public function it_should_not_insert_any_comment_if_auth_is_not_set_in_post_request()
-    {
-        $nonce = wp_create_nonce('button-click');
-        $_POST['content'] = 'some content';
-        $post_id = $this->factory()->post->create();
-        $_POST['post_id'] = $post_id;
-
-        /** @var idlikethis_Endpoints_ButtonClickHandlerInterface $endpoint */
-        $endpoint = self::$container->make('idlikethis_Endpoints_ButtonClickHandlerInterface');
-
-        /** @var \WP_REST_Response $out */
-        $out = $endpoint->handle();
-
-        $this->assertInstanceOf('WP_REST_Response', $out);
-        $this->assertEquals(403, $out->get_status());
-        $this->assertCount(0, get_comments(['comment_type' => 'idlikethis']));
-    }
-
-    /**
-     * @test
-     * it should not insert any comment if auth is not valid
-     */
-    public function it_should_not_insert_any_comment_if_auth_is_not_valid()
-    {
-        $nonce = wp_create_nonce('button-click');
-        $_POST['auth'] = 'some-invalid-nonce';
-        $_POST['content'] = 'some content';
-        $post_id = $this->factory()->post->create();
-        $_POST['post_id'] = $post_id;
-
-        /** @var idlikethis_Endpoints_ButtonClickHandlerInterface $endpoint */
-        $endpoint = self::$container->make('idlikethis_Endpoints_ButtonClickHandlerInterface');
-
-        /** @var \WP_REST_Response $out */
-        $out = $endpoint->handle();
-
-        $this->assertInstanceOf('WP_REST_Response', $out);
-        $this->assertEquals(403, $out->get_status());
-        $this->assertCount(0, get_comments(['comment_type' => 'idlikethis']));
-    }
-
-    /**
-     * @test
      * it should not insert any comment if post ID is missing from POST request
      */
     public function it_should_not_insert_any_comment_if_post_id_is_missing_from_post_request()
     {
-        $nonce = wp_create_nonce('button-click');
-        $_POST['auth'] = $nonce;
-        $_POST['content'] = 'some content';
-
         /** @var idlikethis_Endpoints_ButtonClickHandlerInterface $endpoint */
         $endpoint = self::$container->make('idlikethis_Endpoints_ButtonClickHandlerInterface');
 
+        $request = new \WP_REST_Request('create', '/some-path', ['content' => 'some content']);
         /** @var \WP_REST_Response $out */
-        $out = $endpoint->handle();
+        $out = $endpoint->handle($request);
 
         $this->assertInstanceOf('WP_REST_Response', $out);
         $this->assertEquals(400, $out->get_status());
@@ -103,16 +55,12 @@ class ButtonClickPostRequestTest extends \Codeception\TestCase\WPTestCase
      */
     public function it_should_not_insert_any_comment_if_post_id_is_not_a_valid_post_id()
     {
-        $nonce = wp_create_nonce('button-click');
-        $_POST['auth'] = $nonce;
-        $_POST['content'] = 'some content';
-        $_POST['post_id'] = 123;
-
         /** @var idlikethis_Endpoints_ButtonClickHandlerInterface $endpoint */
         $endpoint = self::$container->make('idlikethis_Endpoints_ButtonClickHandlerInterface');
 
+        $request = new \WP_REST_Request('create', '/some-path', ['content' => 'some content', 'post_id' => 123]);
         /** @var \WP_REST_Response $out */
-        $out = $endpoint->handle();
+        $out = $endpoint->handle($request);
 
         $this->assertInstanceOf('WP_REST_Response', $out);
         $this->assertEquals(400, $out->get_status());
@@ -125,17 +73,14 @@ class ButtonClickPostRequestTest extends \Codeception\TestCase\WPTestCase
      */
     public function it_should_not_insert_any_comment_if_content_is_missing_from_post_request()
     {
-        $nonce = wp_create_nonce('button-click');
-        $_POST['auth'] = $nonce;
-        $_POST['content'] = '';
         $post_id = $this->factory()->post->create();
-        $_POST['post_id'] = $post_id;
 
         /** @var idlikethis_Endpoints_ButtonClickHandlerInterface $endpoint */
         $endpoint = self::$container->make('idlikethis_Endpoints_ButtonClickHandlerInterface');
 
+        $request = new \WP_REST_Request('create', '/some-path', ['post_id' => $post_id]);
         /** @var \WP_REST_Response $out */
-        $out = $endpoint->handle();
+        $out = $endpoint->handle($request);
 
         $this->assertInstanceOf('WP_REST_Response', $out);
         $this->assertEquals(400, $out->get_status());
@@ -148,17 +93,16 @@ class ButtonClickPostRequestTest extends \Codeception\TestCase\WPTestCase
      */
     public function it_should_insert_a_comment_when_hitting_the_endpoint_with_valid_params()
     {
-        $nonce = wp_create_nonce('button-click');
-        $_POST['auth'] = $nonce;
-        $_POST['content'] = 'some idea of mine';
         $post_id = $this->factory()->post->create();
-        $_POST['post_id'] = $post_id;
 
         /** @var idlikethis_Endpoints_ButtonClickHandlerInterface $endpoint */
         $endpoint = self::$container->make('idlikethis_Endpoints_ButtonClickHandlerInterface');
 
+        $request = new \WP_REST_Request();
+        $request->set_param('post_id', $post_id);
+        $request->set_param('content', 'some idea of mine');
         /** @var \WP_REST_Response $out */
-        $out = $endpoint->handle();
+        $out = $endpoint->handle($request);
 
         $this->assertInstanceOf('WP_REST_Response', $out);
         $this->assertEquals(200, $out->get_status());

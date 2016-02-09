@@ -10,11 +10,13 @@ class idlikethis_Scripts_FrontEndDataProvider implements idlikethis_Scripts_Fron
      */
     public function get_data()
     {
+        $nonce = wp_create_nonce('wp_rest');
         return array(
             'endpoints' => array(
-                'button-click' => array(
-                    'url' => home_url('idlikethis/v1/button-click/'),
-                    'nonce' => wp_create_nonce('button-click'),
+                'domain' => home_url(),
+                'nonce' => $nonce,
+                'button_click' => array(
+                    'url' => rest_get_url_prefix() . '/idlikethis/v1/button-click/',
                 )
             )
         );

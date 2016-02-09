@@ -47,16 +47,13 @@
 	(function () {
 	    __webpack_require__(1);
 
-	    __webpack_require__(5);
-	    __webpack_require__(6);
-
-	    var idlikethis = __webpack_require__(7),
-	        $ = __webpack_require__(9);
+	    var app = __webpack_require__(5),
+	        $ = __webpack_require__(10);
 
 	    function bootstrap() {
 	        // create a Backbone view on each button
-	        $('.idlikethis-button').each(function (button) {
-	            new idlikethis.Views.Button({ el: button });
+	        $('.idlikethis-button').each(function (_, button) {
+	            new app.Views.Button({ el: button });
 	        });
 	    };
 
@@ -415,40 +412,84 @@
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	// provided by WordPress
-	module.exports = window._;
+	module.exports = {
+	    data: window.idlikethisData || {},
+	    Views: {
+	        Button: __webpack_require__(6)
+	    },
+	    Models: {
+	        VoteCaster: __webpack_require__(8)
+	    }
+	};
 
 /***/ },
 /* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Backbone = __webpack_require__(7),
+	    VoteCaster = __webpack_require__(8);
+
+	module.exports = Backbone.View.extend({
+	    initialize: function (hash) {
+	        if (hash && hash.model !== undefined) {
+	            this.model = hash.model;
+	        } else {
+	            this.model = new VoteCaster({
+	                post_id: this.$el.data('post-id'),
+	                content: this.$el.data('text')
+	            });
+	        }
+	    },
+
+	    castVote: function () {
+	        console.log(this.model.toJSON());
+	        this.model.save();
+	    },
+
+	    events: {
+	        'click': 'castVote'
+	    }
+	});
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	// provided by WordPress
 	module.exports = window.Backbone;
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = {
-	    Views: {
-	        Button: __webpack_require__(8)
-	    }
-	};
+	var data = __webpack_require__(9),
+	    Backbone = __webpack_require__(7);
 
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
+	module.exports = Backbone.Model.extend({
 
-	module.exports = Backbone.View.extend({
-	    initialize: function () {
-	        console.log('Button initialized');
+	    url: data.endpoints.button_click.url,
+
+	    sync: function () {
+
+	        Backbone.sync('create', this, {
+	            beforeSend: function (xhr) {
+	                xhr.setRequestHeader('X-WP-NONCE', data.endpoints.nonce);
+	            }
+	        });
 	    }
+
 	});
 
 /***/ },
 /* 9 */
+/***/ function(module, exports) {
+
+	module.exports = window.idlikethisData || {};
+
+/***/ },
+/* 10 */
 /***/ function(module, exports) {
 
 	// provided by WordPress
