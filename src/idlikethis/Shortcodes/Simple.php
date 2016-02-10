@@ -64,7 +64,7 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
     public function render($attributes = array(), $content = '')
     {
         $data = $this->template_data;
-        $data['comment_text'] = $this->context->get_comment_text();
+        $data['comment_text'] = $this->get_comment_text($attributes, $content);
         $data['post_id'] = $this->context->get_post_id();
 
         return $this->render_engine->render($this->template_slug, $data);
@@ -87,5 +87,15 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
     public function set_template_data(array $data)
     {
         $this->template_data = $data;
+    }
+
+    /**
+     * @param string|array $attributes
+     * @param string $content
+     * @return string
+     */
+    protected function get_comment_text($attributes = array(), $content = '')
+    {
+        return $this->context->get_comment_text();
     }
 }

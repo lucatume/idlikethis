@@ -19,7 +19,7 @@ class idlikethis_ServiceProviders_Shortcodes extends tad_DI52_ServiceProvider
         $this->container->singleton('Smarty', $smarty);
 
         $this->container->singleton('idlikethis_Templates_RenderEngineInterface', 'idlikethis_Adapters_SmartyAdapter');
-        $this->container->bind('idlikethis_Shortcodes_ShortcodeInterface', 'idlikethis_Shortcodes_Simple');
+        $this->container->bind('idlikethis_Shortcodes_ShortcodeInterface', 'idlikethis_Shortcodes_UserContentShortcode');
         $this->container->bind('idlikethis_Contexts_ShortcodeContextInterface', 'idlikethis_Contexts_ShortcodeContext');
 
         $simple_shortcode = $this->container->resolve('idlikethis_Shortcodes_ShortcodeInterface');
