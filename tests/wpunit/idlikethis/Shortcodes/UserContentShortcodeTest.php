@@ -53,9 +53,9 @@ class UserContentShortcodeTest extends \Codeception\TestCase\WPTestCase
 
     /**
      * @test
-     * it should return the contenxt default text if the content is not provided
+     * it should return the context default text if the content is not provided
      */
-    public function it_should_return_the_contenxt_default_text_if_the_content_is_not_provided()
+    public function it_should_return_the_context_default_text_if_the_content_is_not_provided()
     {
         $sut = $this->make_instance();
         $this->context->get_post_id()->willReturn(23);
