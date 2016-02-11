@@ -33,7 +33,7 @@ class idlikethis_Comments_TableFilter implements idlikethis_Comments_TableFilter
         if (!$this->context->is_comments_edit_screen()) {
             return;
         }
-        $old = isset($query->query_vars['type__not_in']) ? $query->query_vars['type__not_in'] : array();
+        $old = isset($query->query_vars['type__not_in']) ? (array)$query->query_vars['type__not_in'] : array();
         $query->query_vars['type__not_in'] = array_merge($old, (array)$this->comment_type);
     }
 }
