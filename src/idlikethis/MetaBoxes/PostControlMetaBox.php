@@ -57,7 +57,7 @@ class idlikethis_MetaBoxes_PostControlMetaBox implements idlikethis_MetaBoxes_Po
      * Echoes the meta box markup to the page.
      *
      * @param string|WP_Post|array $object
-     * @param $box
+     * @param array|mixed $box The meta box registration description.
      * @return void
      */
     public function render($object, $box)

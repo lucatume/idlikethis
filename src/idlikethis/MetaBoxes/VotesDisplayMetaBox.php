@@ -57,7 +57,7 @@ class idlikethis_MetaBoxes_VotesDisplayMetaBox implements idlikethis_MetaBoxes_V
      * Echoes the meta box markup to the page.
      *
      * @param string|WP_Post|array $object
-     * @param array|mixed $box The metabox registration description.
+     * @param array|mixed $box The meta box registration description.
      * @return void
      */
     public function render($object, $box)
