@@ -10,7 +10,10 @@ class idlikethis_Comments_TableContext implements idlikethis_Comments_TableConte
      */
     public function is_comments_edit_screen()
     {
+        if (!is_admin()) {
+            return;
+        }
         $current_screen = get_current_screen();
-        return is_admin() && $current_screen && $current_screen->base == 'edit-comments';
+        return $current_screen && $current_screen->base == 'edit-comments';
     }
 }
