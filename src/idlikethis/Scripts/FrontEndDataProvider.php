@@ -16,7 +16,7 @@ class idlikethis_Scripts_FrontEndDataProvider implements idlikethis_Scripts_Fron
                 'domain' => home_url(),
                 'nonce' => $nonce,
                 'button_click' => array(
-                    'url' => rest_get_url_prefix() . '/idlikethis/v1/button-click/',
+                    'url' => home_url(rest_get_url_prefix() . '/idlikethis/v1/button-click/'),
                 )
             )
         );

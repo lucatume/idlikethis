@@ -13,6 +13,8 @@ class idlikethis_ServiceProviders_MetaBoxes extends tad_DI52_ServiceProvider
 
     public function add_meta_boxes()
     {
+        $this->container->singleton('idlikethis_Texts_VotesMetaboxTextProviderInterface', 'idlikethis_Texts_VotesMetaboxTextProvider');
+
         $this->container->bind('idlikethis_MetaBoxes_VotesDisplayMetaBoxInterface', 'idlikethis_MetaBoxes_VotesDisplayMetaBox');
         $this->container->bind('idlikethis_MetaBoxes_PostControlMetaBoxInterface', 'idlikethis_MetaBoxes_PostControlMetaBox');
 

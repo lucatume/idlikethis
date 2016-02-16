@@ -94,6 +94,139 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $this->assertEquals($user_id, $comment->user_id, $out);
     }
 
+    /**
+     * @test
+     * it should throw if trying to get comments of non post
+     */
+    public function it_should_throw_if_trying_to_get_comments_of_non_post()
+    {
+        $post_id = 123;
+
+        $this->setExpectedException('InvalidArgumentException');
+
+        $sut = $this->make_instance();
+        $sut->get_comments_for_post($post_id);
+    }
+
+    /**
+     * @test
+     * it should return empty array if post has no comments associated to it
+     */
+    public function it_should_return_empty_array_if_post_has_no_comments_associated_to_it()
+    {
+        $post_id = $this->factory()->post->create();
+
+        $sut = $this->make_instance();
+        $out = $sut->get_comments_for_post($post_id);
+
+        $this->assertEquals([], $out);
+    }
+
+    /**
+     * @test
+     * it should return empty array if post has no idlikethis comments associated to it
+     */
+    public function it_should_return_empty_array_if_post_has_no_idlikethis_comments_associated_to_it()
+    {
+        $post_id = $this->factory()->post->create();
+        $comments = $this->factory()->comment->create_many(5, ['comment_post_ID' => $post_id]);
+
+        $sut = $this->make_instance();
+        $out = $sut->get_comments_for_post($post_id);
+
+        $this->assertEquals([], $out);
+    }
+
+    /**
+     * @test
+     * it should return array of texts to comments IDs when post has comments associated to it
+     */
+    public function it_should_return_array_of_texts_to_comments_i_ds_when_post_has_comments_associated_to_it()
+    {
+        $post_id = $this->factory()->post->create();
+        $comments = [];
+        array_map(function ($count) use (&$comments, $post_id) {
+            $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'idlikethis', 'comment_content' => $count . ' - first idea'];
+            $comments[] = $this->factory()->comment->create($comment_data);
+        }, range(0, 4));
+
+        $sut = $this->make_instance();
+        $out = $sut->get_comments_for_post($post_id);
+
+        $this->assertCount(1, $out);
+        $this->assertArrayHasKey('first idea', $out);
+        $this->assertCount(5, $out['first idea']);
+        $this->assertEquals($comments, $out['first idea']);
+    }
+
+    /**
+     * @test
+     * it should return array of multiple text comment IDs when post has more than one idea associated to it
+     */
+    public function it_should_return_array_of_multiple_text_comment_i_ds_when_post_has_more_than_one_idea_associated_to_it()
+    {
+        $post_id = $this->factory()->post->create();
+        $comments = [];
+        $ideas = ['first idea', 'second idea', 'third idea'];
+        foreach ($ideas as $idea) {
+            $comments[$idea] = [];
+            array_map(function ($count) use (&$comments, $post_id, $idea) {
+                $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'idlikethis', 'comment_content' => $count . ' - ' . $idea];
+                $comments[$idea][] = $this->factory()->comment->create($comment_data);
+            }, range(0, 4));
+        }
+
+        $sut = $this->make_instance();
+        $out = $sut->get_comments_for_post($post_id);
+
+        $this->assertCount(3, $out);
+
+        foreach ($ideas as $idea) {
+            $this->assertArrayHasKey($idea, $out);
+            $this->assertCount(5, $out[$idea]);
+            $this->assertEquals($comments[$idea], $out[$idea]);
+        }
+    }
+
+    /**
+     * @test
+     * it should store and retrieve comments based on idea text no matter the encoding
+     */
+    public function it_should_store_and_retrieve_comments_based_on_idea_text_no_matter_the_encoding()
+    {
+        $sut = $this->make_instance();
+
+        $post_id = $this->factory()->post->create();
+        $idea = 'new & revolutionary <> |\/ idea!';
+
+        array_map(function ($count) use ($post_id, $idea) {
+            $content = esc_attr($count . ' - ' . $idea);
+            $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'idlikethis', 'comment_content' => $content];
+            $this->factory()->comment->create($comment_data);
+        }, range(0, 2));
+
+        $out = $sut->get_comments_for_post($post_id);
+
+        $this->assertCount(1, $out);
+        $this->assertArrayHasKey($idea, $out);
+        $this->assertCount(3, $out[$idea]);
+    }
+
+    /**
+     * @test
+     * it should handle the fast commenting exception
+     */
+    public function it_should_handle_the_fast_commenting_exception()
+    {
+        $sut = $this->make_instance();
+
+        $post_id = $this->factory()->post->create();
+
+        $sut->add_for_post($post_id,'some text');
+        $sut->add_for_post($post_id,'some text');
+        $sut->add_for_post($post_id,'some text');
+    }
+
     private function make_instance()
     {
         return new CommentsRepository();

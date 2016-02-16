@@ -29,10 +29,10 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
 
     /**
      * @param idlikethis_Templates_RenderEngineInterface $render_engine
-     * @param idlikethis_Texts_ProviderInterface $text_provider
+     * @param idlikethis_Texts_ShortcodeTextProviderInterface $text_provider
      * @param idlikethis_Contexts_ShortcodeContextInterface $context
      */
-    public function __construct(idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_ProviderInterface $text_provider, idlikethis_Contexts_ShortcodeContextInterface $context)
+    public function __construct(idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_ShortcodeTextProviderInterface $text_provider, idlikethis_Contexts_ShortcodeContextInterface $context)
     {
         $this->render_engine = $render_engine;
         $this->template_slug = 'shortcodes/simple';

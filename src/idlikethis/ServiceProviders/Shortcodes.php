@@ -11,7 +11,7 @@ class idlikethis_ServiceProviders_Shortcodes extends tad_DI52_ServiceProvider
         $this->container->singleton('idlikethis_Plugin', new idlikethis_Plugin());
         $templates_dir = $this->container->resolve('idlikethis_Plugin')->dir_path('templates');
 
-        $this->container->singleton('idlikethis_Texts_ProviderInterface', 'idlikethis_Texts_Provider');
+        $this->container->singleton('idlikethis_Texts_ShortcodeTextProviderInterface', 'idlikethis_Texts_ShortcodeTextProvider');
 
         $smarty = new Smarty();
         $smarty->setTemplateDir($templates_dir);

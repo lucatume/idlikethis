@@ -11,4 +11,12 @@ interface idlikethis_Repositories_CommentsRepositoryInterface
      * @return false|int Either the inserted comment `comment_id` or `false` on failure.
      */
     public function add_for_post($post_id, $content);
+
+    /**
+     * Gets the idlikethis comments for the post in an associative array of comment text to comments.
+     *
+     * @param int|string|WP_Post $post_id
+     * @return bool|array An array of idlikethis comments for the post or `false` if the post is invalid.
+     */
+    public function get_comments_for_post($post_id);
 }

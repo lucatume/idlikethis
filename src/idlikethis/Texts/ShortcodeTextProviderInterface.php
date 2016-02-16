@@ -1,6 +1,6 @@
 <?php
 
-interface idlikethis_Texts_ProviderInterface
+interface idlikethis_Texts_ShortcodeTextProviderInterface
 {
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-class idlikethis_Texts_Provider implements idlikethis_Texts_ProviderInterface
+class idlikethis_Texts_ShortcodeTextProvider implements idlikethis_Texts_ShortcodeTextProviderInterface
 {
 
     /**

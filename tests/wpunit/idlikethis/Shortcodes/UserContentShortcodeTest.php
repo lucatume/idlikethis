@@ -12,7 +12,7 @@ class UserContentShortcodeTest extends \Codeception\TestCase\WPTestCase
     protected $render_engine;
 
     /**
-     * @var \idlikethis_Texts_ProviderInterface
+     * @var \idlikethis_Texts_ShortcodeTextProviderInterface
      */
     protected $text_provider;
 
@@ -28,7 +28,7 @@ class UserContentShortcodeTest extends \Codeception\TestCase\WPTestCase
 
         // your set up methods here
         $this->render_engine = $this->prophesize('idlikethis_Templates_RenderEngineInterface');
-        $this->text_provider = $this->prophesize('idlikethis_Texts_ProviderInterface');
+        $this->text_provider = $this->prophesize('idlikethis_Texts_ShortcodeTextProviderInterface');
         $this->context = $this->prophesize('idlikethis_Contexts_ShortcodeContextInterface');
     }
 
