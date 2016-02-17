@@ -2,9 +2,9 @@
 namespace idlikethis\Scripts;
 
 use tad\FunctionMocker\FunctionMocker as Test;
-use idlikethis_Scripts_FrontEndScriptsQ as Q;
+use idlikethis_Scripts_BackEndScriptsQ as Q;
 
-class FrontEndScriptsQTest extends \Codeception\TestCase\WPTestCase
+class BackEndScriptsQTest extends \Codeception\TestCase\WPTestCase
 {
 
     /**
@@ -13,7 +13,7 @@ class FrontEndScriptsQTest extends \Codeception\TestCase\WPTestCase
     protected $plugin;
 
     /**
-     * @var \idlikethis_Scripts_FrontEndDataProviderInterface
+     * @var \idlikethis_Scripts_BackEndDataProviderInterface
      */
     protected $data_provider;
 
@@ -25,7 +25,7 @@ class FrontEndScriptsQTest extends \Codeception\TestCase\WPTestCase
         // your set up methods here
         Test::setUp();
         $this->plugin = $this->prophesize('idlikethis_Plugin');
-        $this->data_provider = $this->prophesize('idlikethis_Scripts_FrontEndDataProviderInterface');
+        $this->data_provider = $this->prophesize('idlikethis_Scripts_BackEndDataProviderInterface');
     }
 
     public function tearDown()
@@ -44,7 +44,7 @@ class FrontEndScriptsQTest extends \Codeception\TestCase\WPTestCase
     public function it_should_be_instantiatable()
     {
         $sut = $this->make_instance();
-        $this->assertInstanceOf('idlikethis_Scripts_FrontEndScriptsQ', $sut);
+        $this->assertInstanceOf('idlikethis_Scripts_BackEndScriptsQ', $sut);
     }
 
     /**
@@ -55,12 +55,12 @@ class FrontEndScriptsQTest extends \Codeception\TestCase\WPTestCase
     {
         $sut = $this->make_instance();
 
-        $this->plugin->dir_url('assets/js/dist/idlikethis.js')->willReturn('foo.js');
+        $this->plugin->dir_url('assets/js/dist/idlikethis-admin.js')->willReturn('foo.js');
         $wp_enqueue_script = Test::replace('wp_enqueue_script');
 
         $sut->enqueue();
 
-        $wp_enqueue_script->wasCalledWithOnce(['idlikethis', 'foo.js', ['backbone'], null, true]);
+        $wp_enqueue_script->wasCalledWithOnce(['idlikethis-admin', 'foo.js', ['backbone'], null, true]);
     }
 
     /**
@@ -71,14 +71,14 @@ class FrontEndScriptsQTest extends \Codeception\TestCase\WPTestCase
     {
         $sut = $this->make_instance();
 
-        $this->plugin->dir_url('assets/js/dist/idlikethis.js')->willReturn('foo.js');
+        $this->plugin->dir_url('assets/js/dist/idlikethis-admin.js')->willReturn('foo.js');
         $data = ['some' => 'data'];
         $this->data_provider->get_data()->willReturn($data);
         $wp_localize_script = Test::replace('wp_localize_script');
 
         $sut->enqueue();
 
-        $wp_localize_script->wasCalledWithOnce(['idlikethis', 'idlikethisData', $data]);
+        $wp_localize_script->wasCalledWithOnce(['idlikethis-admin', 'idlikethisData', $data]);
 
     }
 

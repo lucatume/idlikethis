@@ -48,7 +48,7 @@
 	    __webpack_require__(1);
 
 	    var app = __webpack_require__(5),
-	        $ = __webpack_require__(11);
+	        $ = __webpack_require__(12);
 
 	    function bootstrap() {
 	        // create a Backbone view on each button
@@ -466,7 +466,7 @@
 
 	var data = __webpack_require__(9),
 	    Backbone = __webpack_require__(7),
-	    lscache = __webpack_require__(12);
+	    lscache = __webpack_require__(10);
 
 	module.exports = Backbone.Model.extend({
 
@@ -513,6 +513,16 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var lscache = __webpack_require__(11);
+
+	lscache.set('idlikethis', { votes: {} });
+
+	module.exports = lscache;
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -868,21 +878,11 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	// provided by WordPress
 	module.exports = window.jQuery;
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var lscache = __webpack_require__(10);
-
-	lscache.set('idlikethis', { votes: {} });
-
-	module.exports = lscache;
 
 /***/ }
 /******/ ]);

@@ -1,6 +1,6 @@
 <?php
 
-interface idlikethis_Texts_VotesMetaboxTextProviderInterface
+interface idlikethis_Texts_VotesMetaBoxTextProviderInterface
 {
 
     /**

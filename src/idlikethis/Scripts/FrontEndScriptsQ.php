@@ -28,9 +28,9 @@ class idlikethis_Scripts_FrontEndScriptsQ implements idlikethis_Scripts_FrontEnd
      */
     public function enqueue()
     {
-        $bundle_url = $this->plugin->dir_url('assets/js/dist/idlikethis-bundle.js');
-        wp_enqueue_script('idlikethis-bundle', $bundle_url, array('backbone'), null, true);
+        $bundle_url = $this->plugin->dir_url('assets/js/dist/idlikethis.js');
+        wp_enqueue_script('idlikethis', $bundle_url, array('backbone'), null, true);
         $data = $this->data_provider->get_data();
-        wp_localize_script('idlikethis-bundle', 'idlikethisData', $data);
+        wp_localize_script('idlikethis', 'idlikethisData', $data);
     }
 }

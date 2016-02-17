@@ -8,7 +8,7 @@ class idlikethis_MetaBoxes_VotesDisplayMetaBox implements idlikethis_MetaBoxes_V
     protected $comments_repository;
 
     /**
-     * @var idlikethis_Texts_VotesMetaboxTextProviderInterface
+     * @var idlikethis_Texts_VotesMetaBoxTextProviderInterface
      */
     protected $texts;
 
@@ -27,7 +27,7 @@ class idlikethis_MetaBoxes_VotesDisplayMetaBox implements idlikethis_MetaBoxes_V
      */
     protected $template_data;
 
-    public function __construct(idlikethis_Repositories_CommentsRepositoryInterface $comments_repository, idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_VotesMetaboxTextProviderInterface $texts)
+    public function __construct(idlikethis_Repositories_CommentsRepositoryInterface $comments_repository, idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_VotesMetaBoxTextProviderInterface $texts)
     {
         $this->comments_repository = $comments_repository;
         $this->render_engine = $render_engine;

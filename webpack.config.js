@@ -1,8 +1,12 @@
 var path = require('path');
 
 module.exports = {
-    entry: './assets/js/idlikethis.js',
-    output: {filename: './assets/js/dist/idlikethis-bundle.js'},
+    entry:
+    {
+        'idlikethis': './assets/js/idlikethis.js',
+        'idlikethis-admin': './assets/js/idlikethis-admin.js'
+    },
+    output: {filename: './assets/js/dist/[name].js'},
     module: {
         loaders: [
             {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},

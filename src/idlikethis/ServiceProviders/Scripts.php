@@ -8,10 +8,14 @@ class idlikethis_ServiceProviders_Scripts extends tad_DI52_ServiceProvider
      */
     public function register()
     {
-        $this->container->bind('idlikethis_Scripts_FrontEndDataProviderInterface','idlikethis_Scripts_FrontEndDataProvider');
+        $this->container->singleton('idlikethis_Scripts_FrontEndDataProviderInterface','idlikethis_Scripts_FrontEndDataProvider');
         $this->container->singleton('idlikethis_Scripts_FrontEndScriptsQInterface', 'idlikethis_Scripts_FrontEndScriptsQ');
 
+        $this->container->singleton('idlikethis_Scripts_BackEndDataProviderInterface','idlikethis_Scripts_BackEndDataProvider');
+        $this->container->singleton('idlikethis_Scripts_BackEndScriptsQInterface', 'idlikethis_Scripts_BackEndScriptsQ');
+
         add_action('wp_enqueue_scripts', array($this->container->make('idlikethis_Scripts_FrontEndScriptsQInterface'), 'enqueue'));
+        add_action('admin_enqueue_scripts', array($this->container->make('idlikethis_Scripts_BackEndScriptsQInterface'), 'enqueue'));
     }
 
     /**

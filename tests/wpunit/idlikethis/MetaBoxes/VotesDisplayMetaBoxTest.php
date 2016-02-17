@@ -13,7 +13,7 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
     protected $commments_repository;
 
     /**
-     * @var \idlikethis_Texts_VotesMetaboxTextProviderInterface
+     * @var \idlikethis_Texts_VotesMetaBoxTextProviderInterface
      */
     protected $texts_provider;
 
@@ -30,7 +30,7 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
         // your set up methods here
         $this->commments_repository = $this->prophesize("idlikethis_Repositories_CommentsRepositoryInterface");
         $this->render_engine = $this->prophesize('idlikethis_Templates_RenderEngineInterface');
-        $this->texts_provider = $this->prophesize("idlikethis_Texts_VotesMetaboxTextProviderInterface");
+        $this->texts_provider = $this->prophesize("idlikethis_Texts_VotesMetaBoxTextProviderInterface");
     }
 
     public function tearDown()

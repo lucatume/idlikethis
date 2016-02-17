@@ -1,6 +1,6 @@
 <?php
 
-class idlikethis_Texts_VotesMetaBoxTextProvider implements idlikethis_Texts_VotesMetaboxTextProviderInterface
+class idlikethis_Texts_VotesMetaBoxTextProvider implements idlikethis_Texts_VotesMetaBoxTextProviderInterface
 {
 
     /**
