@@ -222,9 +222,58 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
 
         $post_id = $this->factory()->post->create();
 
-        $sut->add_for_post($post_id,'some text');
-        $sut->add_for_post($post_id,'some text');
-        $sut->add_for_post($post_id,'some text');
+        $sut->add_for_post($post_id, 'some text');
+        $sut->add_for_post($post_id, 'some text');
+        $sut->add_for_post($post_id, 'some text');
+    }
+
+    /**
+     * @test
+     * it should return false if trying to reset all comments on a non existing post
+     */
+    public function it_should_return_false_if_trying_to_reset_all_comments_on_a_non_existing_post()
+    {
+        $sut = $this->make_instance();
+
+        $out = $sut->reset_comments_for_post(3344);
+
+        $this->assertFalse($out);
+    }
+
+    /**
+     * @test
+     * it should delete all comments associated to a post when resetting
+     */
+    public function it_should_delete_all_comments_associated_to_a_post_when_resetting()
+    {
+        $sut = $this->make_instance();
+
+        $post_id = $this->factory()->post->create();
+        $this->factory()->comment->create_many(5, $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'idlikethis']);
+
+        $out = $sut->reset_comments_for_post($post_id);
+
+        $this->assertEquals(5, $out);
+    }
+
+    /**
+     * @test
+     * it should not delete not idlikethis comments when resetting
+     */
+    public function it_should_not_delete_not_idlikethis_comments_when_resetting()
+    {
+        $sut = $this->make_instance();
+
+        $post_id = $this->factory()->post->create();
+        $this->factory()->comment->create_many(5, $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'idlikethis']);
+        $comment_ids = $this->factory()->comment->create_many(5, $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'not-idlikethis']);
+
+        $out = $sut->reset_comments_for_post($post_id);
+
+        $this->assertEquals(5, $out);
+        foreach ($comment_ids as $comment_id) {
+            $this->assertNotEmpty(get_comment($comment_id));
+        }
     }
 
     private function make_instance()

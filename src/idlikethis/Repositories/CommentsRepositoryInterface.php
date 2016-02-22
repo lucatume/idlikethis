@@ -19,4 +19,12 @@ interface idlikethis_Repositories_CommentsRepositoryInterface
      * @return bool|array An array of idlikethis comments for the post or `false` if the post is invalid.
      */
     public function get_comments_for_post($post_id);
+
+    /**
+     * Resets the comments associated to a post.
+     *
+     * @param int $post_id
+     * @return bool True on success or false on failure.
+     */
+    public function reset_comments_for_post($post_id);
 }

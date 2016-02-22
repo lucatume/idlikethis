@@ -582,16 +582,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5d04bdd2881ac89abde1fb78cc234bce24327bb"
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5d04bdd2881ac89abde1fb78cc234bce24327bb",
-                "reference": "f5d04bdd2881ac89abde1fb78cc234bce24327bb",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
                 "shasum": ""
             },
             "require": {
@@ -636,7 +636,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-01-23 01:23:02"
+            "time": "2016-02-18 21:54:00"
         },
         {
             "name": "hautelook/phpass",
@@ -684,16 +684,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.2.7",
+            "version": "v5.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "51b3acf96a12f5a10d767d5f2a534fed6f304235"
+                "reference": "511a6798e097666b95c6ef3f339e386cc006feba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/51b3acf96a12f5a10d767d5f2a534fed6f304235",
-                "reference": "51b3acf96a12f5a10d767d5f2a534fed6f304235",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/511a6798e097666b95c6ef3f339e386cc006feba",
+                "reference": "511a6798e097666b95c6ef3f339e386cc006feba",
                 "shasum": ""
             },
             "require": {
@@ -722,20 +722,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "http://laravel.com",
-            "time": "2015-12-19 14:25:38"
+            "time": "2016-01-07 19:57:38"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.2.7",
+            "version": "v5.2.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "6d8dec02825299b0ad47712564e9d33104e148c4"
+                "reference": "6443a072215137161dcfc56385af95dd6eceaaad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/6d8dec02825299b0ad47712564e9d33104e148c4",
-                "reference": "6d8dec02825299b0ad47712564e9d33104e148c4",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/6443a072215137161dcfc56385af95dd6eceaaad",
+                "reference": "6443a072215137161dcfc56385af95dd6eceaaad",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "http://laravel.com",
-            "time": "2016-01-07 11:02:28"
+            "time": "2016-02-16 14:39:24"
         },
         {
             "name": "lucatume/args",
@@ -863,16 +863,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "1.9.4",
+            "version": "1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "50d85230e0f0cf008bbecc6d54458be2732b1fd3"
+                "reference": "9c707bfaa3e501b0b2724a5b39a979f06e68014b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/50d85230e0f0cf008bbecc6d54458be2732b1fd3",
-                "reference": "50d85230e0f0cf008bbecc6d54458be2732b1fd3",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/9c707bfaa3e501b0b2724a5b39a979f06e68014b",
+                "reference": "9c707bfaa3e501b0b2724a5b39a979f06e68014b",
                 "shasum": ""
             },
             "require": {
@@ -915,7 +915,7 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2016-02-05 09:23:29"
+            "time": "2016-02-22 12:07:13"
         },
         {
             "name": "mikemclin/laravel-wp-password",

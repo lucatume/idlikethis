@@ -101,4 +101,25 @@ class idlikethis_Repositories_CommentsRepository implements idlikethis_Repositor
     {
         $comment->idlikethis_text = wp_specialchars_decode($this->get_idea_text($comment->comment_content));
     }
+
+    /**
+     * Resets the comments associated to a post.
+     *
+     * @param int $post_id
+     * @return bool True on success or false on failure.
+     */
+    public function reset_comments_for_post($post_id)
+    {
+        if (empty(get_post($post_id))) {
+            return false;
+        }
+        $count = 0;
+        $comment_ids = get_comments(['post_id' => $post_id, 'type' => 'idlikethis']);
+        foreach ($comment_ids as $comment_id) {
+            wp_delete_comment($comment_id, true);
+            $count += 1;
+        }
+
+        return $count;
+    }
 }
