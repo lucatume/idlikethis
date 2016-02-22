@@ -13,7 +13,7 @@ class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     protected $auth_handler;
 
     /**
-     * @var \idlikethis_Repositories_CommentsRepositoryInterface
+     * @var \idlikethis_Repositories_VotesRepositoryInterface
      */
     protected $comments_repository;
 
@@ -24,7 +24,7 @@ class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
         // your set up methods here
         $this->auth_handler = $this->prophesize('idlikethis_Endpoints_AuthHandlerInterface');
-        $this->comments_repository = $this->prophesize('idlikethis_Repositories_CommentsRepositoryInterface');
+        $this->comments_repository = $this->prophesize('idlikethis_Repositories_VotesRepositoryInterface');
     }
 
     public function tearDown()
@@ -83,7 +83,7 @@ class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     public function it_should_return_400_response_if_comment_reset_fails()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comments_repository->reset_comments_for_post(Argument::any())->willReturn(false);
+        $this->comments_repository->reset_votes_for_post(Argument::any())->willReturn(false);
 
         $sut = $this->make_instance();
 
@@ -99,7 +99,7 @@ class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     public function it_should_return_200_response_if_comment_insertion_succeeds()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comments_repository->reset_comments_for_post(Argument::any())->willReturn(true);
+        $this->comments_repository->reset_votes_for_post(Argument::any())->willReturn(true);
 
         $sut = $this->make_instance();
 

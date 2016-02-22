@@ -3,7 +3,7 @@
 class idlikethis_MetaBoxes_VotesDisplayMetaBox implements idlikethis_MetaBoxes_VotesDisplayMetaBoxInterface
 {
     /**
-     * @var idlikethis_Repositories_CommentsRepositoryInterface
+     * @var idlikethis_Repositories_VotesRepositoryInterface
      */
     protected $comments_repository;
 
@@ -27,7 +27,7 @@ class idlikethis_MetaBoxes_VotesDisplayMetaBox implements idlikethis_MetaBoxes_V
      */
     protected $template_data;
 
-    public function __construct(idlikethis_Repositories_CommentsRepositoryInterface $comments_repository, idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_VotesMetaBoxTextProviderInterface $texts)
+    public function __construct(idlikethis_Repositories_VotesRepositoryInterface $comments_repository, idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_VotesMetaBoxTextProviderInterface $texts)
     {
         $this->comments_repository = $comments_repository;
         $this->render_engine = $render_engine;
@@ -96,7 +96,7 @@ class idlikethis_MetaBoxes_VotesDisplayMetaBox implements idlikethis_MetaBoxes_V
      */
     public function render($object, $box)
     {
-        $comments = $this->comments_repository->get_comments_for_post($object);
+        $comments = $this->comments_repository->get_votes_for_post($object);
         if (empty($comments)) {
             $this->template_data['has_comments'] = false;
             $this->template_data['header_text'] = $this->texts->get_empty_comments_text();

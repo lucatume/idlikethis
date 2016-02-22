@@ -8,7 +8,7 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
 {
 
     /**
-     * @var \idlikethis_Repositories_CommentsRepositoryInterface
+     * @var \idlikethis_Repositories_VotesRepositoryInterface
      */
     protected $commments_repository;
 
@@ -28,7 +28,7 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
         parent::setUp();
 
         // your set up methods here
-        $this->commments_repository = $this->prophesize("idlikethis_Repositories_CommentsRepositoryInterface");
+        $this->commments_repository = $this->prophesize("idlikethis_Repositories_VotesRepositoryInterface");
         $this->render_engine = $this->prophesize('idlikethis_Templates_RenderEngineInterface');
         $this->texts_provider = $this->prophesize("idlikethis_Texts_VotesMetaBoxTextProviderInterface");
     }
@@ -60,7 +60,7 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
     {
         $post = $this->factory()->post->create_and_get();
 
-        $this->commments_repository->get_comments_for_post($post)->willReturn([]);
+        $this->commments_repository->get_votes_for_post($post)->willReturn([]);
         $this->texts_provider->get_empty_comments_text()->shouldBeCalled();
         $this->render_engine->render(Argument::any(), Argument::any())->shouldBeCalled();
 
@@ -77,7 +77,7 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
         $post = $this->factory()->post->create_and_get();
         $comments = $this->factory()->comment->create_many(10);
 
-        $this->commments_repository->get_comments_for_post($post)->willReturn(['first idea' => array_splice($comments, 0, 5), 'second idea' => $comments]);
+        $this->commments_repository->get_votes_for_post($post)->willReturn(['first idea' => array_splice($comments, 0, 5), 'second idea' => $comments]);
         $this->texts_provider->get_comments_title_text()->shouldBeCalled();
         $this->render_engine->render(Argument::any(), Argument::any())->shouldBeCalled();
 

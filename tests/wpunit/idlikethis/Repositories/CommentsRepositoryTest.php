@@ -39,7 +39,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
     {
         $sut = $this->make_instance();
 
-        $out = $sut->add_for_post(215, 'some content');
+        $out = $sut->add_vote_for_post(215, 'some content');
 
         $this->assertFalse($out);
     }
@@ -53,7 +53,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $sut = $this->make_instance();
 
         $post_id = $this->factory()->post->create(['post_type' => 'post']);
-        $out = $sut->add_for_post($post_id, '');
+        $out = $sut->add_vote_for_post($post_id, '');
 
         $this->assertFalse($out);
     }
@@ -67,7 +67,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $sut = $this->make_instance();
 
         $post_id = $this->factory()->post->create(['post_type' => 'post']);
-        $out = $sut->add_for_post($post_id, 'some-comment');
+        $out = $sut->add_vote_for_post($post_id, 'some-comment');
 
         $comments = get_comments(['post_id' => $post_id]);
         $comment = reset($comments);
@@ -85,7 +85,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $user_id = get_current_user_id();
 
         $post_id = $this->factory()->post->create(['post_type' => 'post']);
-        $out = $sut->add_for_post($post_id, 'some-comment');
+        $out = $sut->add_vote_for_post($post_id, 'some-comment');
 
         $comments = get_comments(['post_id' => $post_id]);
         $comment = reset($comments);
@@ -105,7 +105,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $this->setExpectedException('InvalidArgumentException');
 
         $sut = $this->make_instance();
-        $sut->get_comments_for_post($post_id);
+        $sut->get_votes_for_post($post_id);
     }
 
     /**
@@ -117,7 +117,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $post_id = $this->factory()->post->create();
 
         $sut = $this->make_instance();
-        $out = $sut->get_comments_for_post($post_id);
+        $out = $sut->get_votes_for_post($post_id);
 
         $this->assertEquals([], $out);
     }
@@ -132,7 +132,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $comments = $this->factory()->comment->create_many(5, ['comment_post_ID' => $post_id]);
 
         $sut = $this->make_instance();
-        $out = $sut->get_comments_for_post($post_id);
+        $out = $sut->get_votes_for_post($post_id);
 
         $this->assertEquals([], $out);
     }
@@ -151,7 +151,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         }, range(0, 4));
 
         $sut = $this->make_instance();
-        $out = $sut->get_comments_for_post($post_id);
+        $out = $sut->get_votes_for_post($post_id);
 
         $this->assertCount(1, $out);
         $this->assertArrayHasKey('first idea', $out);
@@ -177,7 +177,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         }
 
         $sut = $this->make_instance();
-        $out = $sut->get_comments_for_post($post_id);
+        $out = $sut->get_votes_for_post($post_id);
 
         $this->assertCount(3, $out);
 
@@ -205,7 +205,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
             $this->factory()->comment->create($comment_data);
         }, range(0, 2));
 
-        $out = $sut->get_comments_for_post($post_id);
+        $out = $sut->get_votes_for_post($post_id);
 
         $this->assertCount(1, $out);
         $this->assertArrayHasKey($idea, $out);
@@ -222,9 +222,9 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
 
         $post_id = $this->factory()->post->create();
 
-        $sut->add_for_post($post_id, 'some text');
-        $sut->add_for_post($post_id, 'some text');
-        $sut->add_for_post($post_id, 'some text');
+        $sut->add_vote_for_post($post_id, 'some text');
+        $sut->add_vote_for_post($post_id, 'some text');
+        $sut->add_vote_for_post($post_id, 'some text');
     }
 
     /**
@@ -235,7 +235,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
     {
         $sut = $this->make_instance();
 
-        $out = $sut->reset_comments_for_post(3344);
+        $out = $sut->reset_votes_for_post(3344);
 
         $this->assertFalse($out);
     }
@@ -251,7 +251,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $post_id = $this->factory()->post->create();
         $this->factory()->comment->create_many(5, $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'idlikethis']);
 
-        $out = $sut->reset_comments_for_post($post_id);
+        $out = $sut->reset_votes_for_post($post_id);
 
         $this->assertEquals(5, $out);
     }
@@ -268,7 +268,7 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase
         $this->factory()->comment->create_many(5, $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'idlikethis']);
         $comment_ids = $this->factory()->comment->create_many(5, $comment_data = ['comment_post_ID' => $post_id, 'comment_type' => 'not-idlikethis']);
 
-        $out = $sut->reset_comments_for_post($post_id);
+        $out = $sut->reset_votes_for_post($post_id);
 
         $this->assertEquals(5, $out);
         foreach ($comment_ids as $comment_id) {

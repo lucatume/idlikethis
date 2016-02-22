@@ -3,7 +3,7 @@
 class idlikethis_MetaBoxes_PostControlMetaBox implements idlikethis_MetaBoxes_PostControlMetaBoxInterface
 {
     /**
-     * @var idlikethis_Repositories_CommentsRepositoryInterface
+     * @var idlikethis_Repositories_VotesRepositoryInterface
      */
     protected $comments_repository;
 
@@ -34,12 +34,12 @@ class idlikethis_MetaBoxes_PostControlMetaBox implements idlikethis_MetaBoxes_Po
 
     /**
      * idlikethis_MetaBoxes_PostControlMetaBox constructor.
-     * @param idlikethis_Repositories_CommentsRepositoryInterface $comments_repository
+     * @param idlikethis_Repositories_VotesRepositoryInterface $comments_repository
      * @param idlikethis_Templates_RenderEngineInterface $rendering_engine
      * @param idlikethis_Texts_PostControlMetaBoxTextsProviderInterface $texts_provider
      * @param idlikethis_Contexts_MetaBoxContextInterface $context
      */
-    public function __construct(idlikethis_Repositories_CommentsRepositoryInterface $comments_repository, idlikethis_Templates_RenderEngineInterface $rendering_engine, idlikethis_Texts_PostControlMetaBoxTextsProviderInterface $texts_provider, idlikethis_Contexts_MetaBoxContextInterface $context)
+    public function __construct(idlikethis_Repositories_VotesRepositoryInterface $comments_repository, idlikethis_Templates_RenderEngineInterface $rendering_engine, idlikethis_Texts_PostControlMetaBoxTextsProviderInterface $texts_provider, idlikethis_Contexts_MetaBoxContextInterface $context)
     {
         $this->comments_repository = $comments_repository;
         $this->render_engine = $rendering_engine;
@@ -109,7 +109,7 @@ class idlikethis_MetaBoxes_PostControlMetaBox implements idlikethis_MetaBoxes_Po
      */
     public function render($object, $box)
     {
-        $comments = $this->comments_repository->get_comments_for_post($object);
+        $comments = $this->comments_repository->get_votes_for_post($object);
         if (empty($comments)) {
             $this->template_data['has_comments'] = false;
             $this->template_data['header_text'] = $this->texts->get_empty_comments_text();

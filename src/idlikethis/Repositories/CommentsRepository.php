@@ -3,7 +3,7 @@
 /**
  * Class idlikethis_Repositories_CommentsRepository
  */
-class idlikethis_Repositories_CommentsRepository implements idlikethis_Repositories_CommentsRepositoryInterface
+class idlikethis_Repositories_CommentsRepository implements idlikethis_Repositories_VotesRepositoryInterface
 {
 
     /**
@@ -13,7 +13,7 @@ class idlikethis_Repositories_CommentsRepository implements idlikethis_Repositor
      * @param string $content
      * @return false|int Either the inserted comment `comment_id` or `false` on failure.
      */
-    public function add_for_post($post_id, $content)
+    public function add_vote_for_post($post_id, $content)
     {
         if (empty(get_post($post_id))) {
             return false;
@@ -49,7 +49,7 @@ class idlikethis_Repositories_CommentsRepository implements idlikethis_Repositor
      * @param int|string|WP_Post $post_id
      * @return bool|array An array of idlikethis comments for the post or `false` if the post is invalid.
      */
-    public function get_comments_for_post($post_id)
+    public function get_votes_for_post($post_id)
     {
         if (!get_post($post_id)) {
             throw new InvalidArgumentException('Post ID must be a valid post ID or WP_Post object');
@@ -108,7 +108,7 @@ class idlikethis_Repositories_CommentsRepository implements idlikethis_Repositor
      * @param int $post_id
      * @return bool True on success or false on failure.
      */
-    public function reset_comments_for_post($post_id)
+    public function reset_votes_for_post($post_id)
     {
         if (empty(get_post($post_id))) {
             return false;

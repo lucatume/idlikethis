@@ -8,11 +8,11 @@ class idlikethis_Endpoints_ResetAllHandler implements idlikethis_Endpoints_Reset
     protected $auth_handler;
 
     /**
-     * @var idlikethis_Repositories_CommentsRepositoryInterface
+     * @var idlikethis_Repositories_VotesRepositoryInterface
      */
     protected $comments_repository;
 
-    public function __construct(idlikethis_Endpoints_AuthHandlerInterface $auth_handler, idlikethis_Repositories_CommentsRepositoryInterface $comments_repository)
+    public function __construct(idlikethis_Endpoints_AuthHandlerInterface $auth_handler, idlikethis_Repositories_VotesRepositoryInterface $comments_repository)
     {
         $this->auth_handler = $auth_handler;
         $this->comments_repository = $comments_repository;
@@ -37,7 +37,7 @@ class idlikethis_Endpoints_ResetAllHandler implements idlikethis_Endpoints_Reset
             return new WP_REST_Response('Missing post ID', 400, $headers);
         }
 
-        $exit = $this->comments_repository->reset_comments_for_post($post_id);
+        $exit = $this->comments_repository->reset_votes_for_post($post_id);
 
         $message = empty($exit) ? 'Could not reset comments for post' : $exit;
         $status = empty($exit) ? 400 : 200;

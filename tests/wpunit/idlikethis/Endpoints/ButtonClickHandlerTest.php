@@ -13,7 +13,7 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     protected $auth_handler;
 
     /**
-     * @var \idlikethis_Repositories_CommentsRepositoryInterface
+     * @var \idlikethis_Repositories_VotesRepositoryInterface
      */
     protected $comment_repository;
 
@@ -25,7 +25,7 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
         // your set up methods here
         $this->auth_handler = $this->prophesize('idlikethis_Endpoints_AuthHandlerInterface');
-        $this->comment_repository = $this->prophesize('idlikethis_Repositories_CommentsRepositoryInterface');
+        $this->comment_repository = $this->prophesize('idlikethis_Repositories_VotesRepositoryInterface');
     }
 
     public function tearDown()
@@ -98,7 +98,7 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     public function it_should_return_400_response_if_comment_insertion_fails()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comment_repository->add_for_post(Argument::any(), Argument::any())->willReturn(false);
+        $this->comment_repository->add_vote_for_post(Argument::any(), Argument::any())->willReturn(false);
 
         $sut = $this->make_instance();
 
@@ -114,7 +114,7 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     public function it_should_return_200_response_if_comment_insertion_succeeds()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comment_repository->add_for_post(Argument::any(), Argument::any())->willReturn(112);
+        $this->comment_repository->add_vote_for_post(Argument::any(), Argument::any())->willReturn(112);
 
         $sut = $this->make_instance();
 
