@@ -1,0 +1,6 @@
+<?php
+
+interface idlikethis_Endpoints_ConsolidateAllHandlerInterface extends idlikethis_Endpoints_HandlerInterface
+{
+
+}

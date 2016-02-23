@@ -15,10 +15,11 @@ interface idlikethis_Repositories_VotesRepositoryInterface
     /**
      * Gets the idlikethis comments for the post in an associative array of comment text to comments.
      *
-     * @param int|string|WP_Post $post_id
-     * @return bool|array An array of idlikethis comments for the post or `false` if the post is invalid.
+     * @param int|string|WP_Post $post
+     *
+*@return bool|array An array of idlikethis comments for the post or `false` if the post is invalid.
      */
-    public function get_votes_for_post($post_id);
+    public function get_votes_for_post( $post);
 
     /**
      * Resets the comments associated to a post.
@@ -27,4 +28,12 @@ interface idlikethis_Repositories_VotesRepositoryInterface
      * @return bool True on success or false on failure.
      */
     public function reset_votes_for_post($post_id);
+
+    /**
+     * Consolidates the votes for a post.
+     *
+     * @param $post_id
+     * @return bool True on succes or false on failure
+     */
+    public function consolidate_votes_for_post($post_id);
 }

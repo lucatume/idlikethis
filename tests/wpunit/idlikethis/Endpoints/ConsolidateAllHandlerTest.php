@@ -1,10 +1,10 @@
 <?php
 namespace idlikethis\Endpoints;
 
-use idlikethis_Endpoints_ResetAllHandler as Handler;
+use idlikethis_Endpoints_ConsolidateAllHandler as Handler;
 use Prophecy\Argument;
 
-class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
+class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 {
 
     /**
@@ -43,7 +43,7 @@ class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     {
         $sut = $this->make_instance();
 
-        $this->assertInstanceOf('idlikethis_Endpoints_ResetAllHandler', $sut);
+        $this->assertInstanceOf('idlikethis_Endpoints_ConsolidateAllHandler', $sut);
     }
 
     /**
@@ -78,12 +78,12 @@ class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
     /**
      * @test
-     * it should return 400 response if comment reset fails
+     * it should return 400 response if comment consolidation fails
      */
-    public function it_should_return_400_response_if_comment_reset_fails()
+    public function it_should_return_400_response_if_comment_consolidation_fails()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comments_repository->reset_votes_for_post(Argument::any())->willReturn(false);
+        $this->comments_repository->consolidate_votes_for_post(Argument::any())->willReturn(false);
 
         $sut = $this->make_instance();
 
@@ -94,12 +94,12 @@ class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
     /**
      * @test
-     * it should return 200 response if comment reset succeeds
+     * it should return 200 response if comment consolidation succeeds
      */
-    public function it_should_return_200_response_if_comment_reset_succeeds()
+    public function it_should_return_200_response_if_comment_consolidation_succeeds()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comments_repository->reset_votes_for_post(Argument::any())->willReturn(true);
+        $this->comments_repository->consolidate_votes_for_post(Argument::any())->willReturn(true);
 
         $sut = $this->make_instance();
 

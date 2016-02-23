@@ -454,7 +454,7 @@
 	        AdminControlButton: __webpack_require__(16)
 	    },
 	    Models: {
-	        ResetAllCommand: __webpack_require__(18),
+	        ResetAllCommand: __webpack_require__(17),
 	        ConsolidateAllCommand: __webpack_require__(19)
 	    }
 	};
@@ -484,6 +484,17 @@
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var ControlCommand = __webpack_require__(18),
+	    data = __webpack_require__(9);
+
+	module.exports = ControlCommand.extend({
+	    url: data.endpoints.reset_all.url
+	});
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var Backbone = __webpack_require__(7);
 
 	module.exports = Backbone.Model.extend({
@@ -498,21 +509,10 @@
 	});
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ControlCommand = __webpack_require__(17),
-	    data = __webpack_require__(9);
-
-	module.exports = ControlCommand.extend({
-	    url: data.endpoints.reset_all.url
-	});
-
-/***/ },
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ControlCommand = __webpack_require__(17),
+	var ControlCommand = __webpack_require__(18),
 	    data = __webpack_require__(9);
 
 	module.exports = ControlCommand.extend({

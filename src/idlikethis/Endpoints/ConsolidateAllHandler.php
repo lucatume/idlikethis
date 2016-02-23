@@ -1,6 +1,6 @@
 <?php
 
-class idlikethis_Endpoints_ResetAllHandler implements idlikethis_Endpoints_ResetAllHandlerInterface
+class idlikethis_Endpoints_ConsolidateAllHandler implements idlikethis_Endpoints_ConsolidateAllHandlerInterface
 {
     /**
      * @var idlikethis_Endpoints_AuthHandlerInterface
@@ -27,7 +27,7 @@ class idlikethis_Endpoints_ResetAllHandler implements idlikethis_Endpoints_Reset
     {
         $headers = array();
 
-        if (!$this->auth_handler->verify_auth($request, 'reset-all')) {
+        if (!$this->auth_handler->verify_auth($request, 'consolidate-all')) {
             return new WP_REST_Response('Invalid auth', 403, $headers);
         }
 
@@ -37,9 +37,9 @@ class idlikethis_Endpoints_ResetAllHandler implements idlikethis_Endpoints_Reset
             return new WP_REST_Response('Missing post ID', 400, $headers);
         }
 
-        $exit = $this->comments_repository->reset_votes_for_post($post_id);
+        $exit = $this->comments_repository->consolidate_votes_for_post($post_id);
 
-        $message = empty($exit) ? 'Could not reset comments for post' : $exit;
+        $message = empty($exit) ? 'Could not consolidate comments for post' : $exit;
         $status = empty($exit) ? 400 : 200;
 
         return new WP_REST_Response($exit, $status, $headers);

@@ -24,6 +24,7 @@ class ResetAllPostRequestTest extends WPTestCase
         parent::setUp();
 
         // your set up methods here
+        wp_set_current_user(1);
     }
 
     public function tearDown()
@@ -48,7 +49,7 @@ class ResetAllPostRequestTest extends WPTestCase
         $out = $endpoint->handle($request);
 
         $this->assertInstanceOf('WP_REST_Response', $out);
-        $this->assertEquals(400, $out->get_status());
+        $this->assertEquals(403, $out->get_status());
     }
 
     /**
@@ -70,7 +71,7 @@ class ResetAllPostRequestTest extends WPTestCase
         $out = $endpoint->handle($request);
 
         $this->assertInstanceOf('WP_REST_Response', $out);
-        $this->assertEquals(400, $out->get_status());
+        $this->assertEquals(403, $out->get_status());
         $this->assertCount(5, get_comments(['post_id' => $post_id, 'type' => 'idlikethis']));
         $this->assertCount(10, get_comments(['post_id' => $post_id]));
     }

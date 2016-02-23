@@ -1,0 +1,6 @@
+<?php
+
+
+interface idlikethis_Endpoints_PostAdminAuthHandlerInterface extends idlikethis_Endpoints_AuthHandlerInterface{
+
+}
