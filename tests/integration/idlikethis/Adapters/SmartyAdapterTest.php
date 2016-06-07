@@ -39,6 +39,13 @@ class SmartyAdapterTest extends \Codeception\TestCase\WPTestCase
         $this->assertInstanceOf('idlikethis_Adapters_SmartyAdapter', $sut);
     }
 
+    private function make_instance() {
+        $sut = new SmartyAdapter( $this->smarty->reveal() );
+
+        return $sut;
+
+    }
+
     /**
      * @test
      * it should assign no template vars if template data is empty
@@ -81,13 +88,5 @@ class SmartyAdapterTest extends \Codeception\TestCase\WPTestCase
         $this->smarty->fetch('some-template.tpl')->willReturn('foo');
 
         $sut->render('some-template', ['key1' => 'value1', 'key2' => 'value2']);
-    }
-
-
-    private function make_instance()
-    {
-        $sut = new SmartyAdapter($this->smarty->reveal());
-        return $sut;
-
     }
 }

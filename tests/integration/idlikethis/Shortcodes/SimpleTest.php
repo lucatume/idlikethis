@@ -39,11 +39,6 @@ class SimpleTest extends \Codeception\TestCase\WPTestCase
         parent::tearDown();
     }
 
-    protected function make_instance()
-    {
-        return new Simple($this->render_engine->reveal(), $this->text_provider->reveal(), $this->context->reveal());
-    }
-
     /**
      * @test
      * it should be instantiatable
@@ -52,6 +47,10 @@ class SimpleTest extends \Codeception\TestCase\WPTestCase
     {
         $sut = $this->make_instance();
         $this->assertInstanceOf('idlikethis_Shortcodes_Simple', $sut);
+    }
+
+    protected function make_instance() {
+        return new Simple( $this->render_engine->reveal(), $this->text_provider->reveal(), $this->context->reveal() );
     }
 
     /**

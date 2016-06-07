@@ -27,6 +27,10 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase {
 		$this->assertInstanceOf( 'idlikethis_Repositories_CommentsRepository', $this->make_instance() );
 	}
 
+	private function make_instance() {
+		return new CommentsRepository();
+	}
+
 	/**
 	 * @test
 	 * it should return false if trying to add a comment to a non existing post
@@ -466,11 +470,6 @@ class CommentsRepositoryTest extends \Codeception\TestCase\WPTestCase {
 		$this->assertArrayHasKey( 'idea two', $votes );
 		$this->assertCount( 20, $votes['idea one'] );
 		$this->assertCount( 33, $votes['idea two'] );
-	}
-
-
-	private function make_instance() {
-		return new CommentsRepository();
 	}
 
 }

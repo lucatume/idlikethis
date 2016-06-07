@@ -2,7 +2,6 @@
 namespace idlikethis\Endpoints;
 
 use idlikethis_Endpoints_PostAdminAuthHandler as PostAdminHandler;
-use tad\WPBrowser\Generators\Post;
 
 class PostAdminAuthHandlerTest extends \Codeception\TestCase\WPTestCase {
 
@@ -28,6 +27,10 @@ class PostAdminAuthHandlerTest extends \Codeception\TestCase\WPTestCase {
 		$sut = $this->make_instance();
 
 		$this->assertInstanceOf( 'idlikethis_Endpoints_PostAdminAuthHandler', $sut );
+	}
+
+	private function make_instance() {
+		return new PostAdminHandler();
 	}
 
 	/**
@@ -109,9 +112,5 @@ class PostAdminAuthHandlerTest extends \Codeception\TestCase\WPTestCase {
 		$request->set_param( 'post_id', $post_id );
 		$out = $sut->verify_auth( $request, reset( $supported_actions ) );
 		$this->assertTrue( $out );
-	}
-
-	private function make_instance() {
-		return new PostAdminHandler();
 	}
 }

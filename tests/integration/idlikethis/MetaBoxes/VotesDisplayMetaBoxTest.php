@@ -52,6 +52,10 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
         $this->assertInstanceOf('idlikethis_MetaBoxes_VotesDisplayMetaBox', $sut);
     }
 
+    private function make_instance() {
+        return new VotesDisplayMetaBox( $this->commments_repository->reveal(), $this->render_engine->reveal(), $this->texts_provider->reveal() );
+    }
+
     /**
      * @test
      * it should render an empty message if there are no idlikethis comments associated to the post
@@ -83,11 +87,6 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
 
         $sut = $this->make_instance();
         $sut->render($post, []);
-    }
-
-    private function make_instance()
-    {
-        return new VotesDisplayMetaBox($this->commments_repository->reveal(), $this->render_engine->reveal(), $this->texts_provider->reveal());
     }
 
 }

@@ -40,6 +40,10 @@ class TableFilterTest extends \Codeception\TestCase\WPTestCase
         $this->assertInstanceOf('idlikethis_Comments_TableFilter', $sut);
     }
 
+    private function make_instance() {
+        return new TableFilter( $this->types, $this->context->reveal() );
+    }
+
     /**
      * @test
      * it should not add the type__not_in query var if not the right context
@@ -115,11 +119,6 @@ class TableFilterTest extends \Codeception\TestCase\WPTestCase
         $sut->on_pre_get_comments($query);
 
         $this->assertEquals(array_merge(['some-other-type'], (array)$this->types), $query->query_vars['type__not_in']);
-    }
-
-    private function make_instance()
-    {
-        return new TableFilter($this->types, $this->context->reveal());
     }
 
 

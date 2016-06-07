@@ -51,6 +51,10 @@ class UserContentShortcodeTest extends \Codeception\TestCase\WPTestCase
         $this->assertInstanceOf('idlikethis_Shortcodes_UserContentShortcode', $sut);
     }
 
+    protected function make_instance() {
+        return new UserContentShortcode( $this->render_engine->reveal(), $this->text_provider->reveal(), $this->context->reveal() );
+    }
+
     /**
      * @test
      * it should return the context default text if the content is not provided
@@ -96,11 +100,6 @@ class UserContentShortcodeTest extends \Codeception\TestCase\WPTestCase
         $this->render_engine->render(Argument::any(), Argument::withEntry('comment_text', esc_attr($content)))->shouldBeCalled();
 
         $out = $sut->render([], $content);
-    }
-
-    protected function make_instance()
-    {
-        return new UserContentShortcode($this->render_engine->reveal(), $this->text_provider->reveal(), $this->context->reveal());
     }
 
 }

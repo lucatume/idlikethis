@@ -1,10 +1,10 @@
 <?php
 namespace idlikethis\Endpoints;
 
-use idlikethis_Endpoints_ConsolidateAllHandler as Handler;
+use idlikethis_Endpoints_ResetAllHandler as Handler;
 use Prophecy\Argument;
 
-class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
+class ResetAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 {
 
     /**
@@ -43,7 +43,11 @@ class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
     {
         $sut = $this->make_instance();
 
-        $this->assertInstanceOf('idlikethis_Endpoints_ConsolidateAllHandler', $sut);
+        $this->assertInstanceOf('idlikethis_Endpoints_ResetAllHandler', $sut);
+    }
+
+    private function make_instance() {
+        return new Handler( $this->auth_handler->reveal(), $this->comments_repository->reveal() );
     }
 
     /**
@@ -78,12 +82,12 @@ class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
     /**
      * @test
-     * it should return 400 response if comment consolidation fails
+     * it should return 400 response if comment reset fails
      */
-    public function it_should_return_400_response_if_comment_consolidation_fails()
+    public function it_should_return_400_response_if_comment_reset_fails()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comments_repository->consolidate_votes_for_post(Argument::any())->willReturn(false);
+        $this->comments_repository->reset_votes_for_post(Argument::any())->willReturn(false);
 
         $sut = $this->make_instance();
 
@@ -94,12 +98,12 @@ class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
     /**
      * @test
-     * it should return 200 response if comment consolidation succeeds
+     * it should return 200 response if comment reset succeeds
      */
-    public function it_should_return_200_response_if_comment_consolidation_succeeds()
+    public function it_should_return_200_response_if_comment_reset_succeeds()
     {
         $this->auth_handler->verify_auth(Argument::any(), Argument::any())->willReturn(true);
-        $this->comments_repository->consolidate_votes_for_post(Argument::any())->willReturn(true);
+        $this->comments_repository->reset_votes_for_post(Argument::any())->willReturn(true);
 
         $sut = $this->make_instance();
 
@@ -110,11 +114,6 @@ class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
         $this->assertEquals(200, $out->status);
         $this->assertEquals(true, $out->data);
-    }
-
-    private function make_instance()
-    {
-        return new Handler($this->auth_handler->reveal(), $this->comments_repository->reveal());
     }
 
 }
