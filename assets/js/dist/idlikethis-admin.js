@@ -342,7 +342,6 @@
 	function applyToTag(styleElement, obj) {
 		var css = obj.css;
 		var media = obj.media;
-		var sourceMap = obj.sourceMap;
 
 		if(media) {
 			styleElement.setAttribute("media", media)
@@ -360,7 +359,6 @@
 
 	function updateLink(linkElement, obj) {
 		var css = obj.css;
-		var media = obj.media;
 		var sourceMap = obj.sourceMap;
 
 		if(sourceMap) {
@@ -495,14 +493,15 @@
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Backbone = __webpack_require__(7);
+	var Backbone = __webpack_require__(7),
+	    data = __webpack_require__(9);
 
 	module.exports = Backbone.Model.extend({
 
 	    sync: function () {
 	        Backbone.sync('create', this, {
 	            beforeSend: function (xhr) {
-	                xhr.setRequestHeader('X-WP-NONCE', this.nonce);
+	                xhr.setRequestHeader('X-WP-NONCE', data.endpoints.nonce);
 	            }
 	        });
 	    }

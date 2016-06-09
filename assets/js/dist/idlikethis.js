@@ -373,7 +373,6 @@
 	function applyToTag(styleElement, obj) {
 		var css = obj.css;
 		var media = obj.media;
-		var sourceMap = obj.sourceMap;
 
 		if(media) {
 			styleElement.setAttribute("media", media)
@@ -391,7 +390,6 @@
 
 	function updateLink(linkElement, obj) {
 		var css = obj.css;
-		var media = obj.media;
 		var sourceMap = obj.sourceMap;
 
 		if(sourceMap) {
@@ -591,12 +589,17 @@
 	      return cachedStorage;
 	    }
 
+	    if (!localStorage) {
+	      return false;
+	    }
+
 	    try {
 	      setItem(key, value);
 	      removeItem(key);
 	      cachedStorage = true;
 	    } catch (e) {
-	        if (isOutOfSpace(e)) {    // If we hit the limit, then it means we have support, 
+	        // If we hit the limit, and we don't have an empty localStorage then it means we have support
+	        if (isOutOfSpace(e) && localStorage.length) {
 	            cachedStorage = true; // just maxed it out and even the set test failed.
 	        } else {
 	            cachedStorage = false;
@@ -607,8 +610,8 @@
 
 	  // Check to set if the error is us dealing with being out of space
 	  function isOutOfSpace(e) {
-	    if (e && e.name === 'QUOTA_EXCEEDED_ERR' || 
-	            e.name === 'NS_ERROR_DOM_QUOTA_REACHED' || 
+	    if (e && e.name === 'QUOTA_EXCEEDED_ERR' ||
+	            e.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
 	            e.name === 'QuotaExceededError') {
 	        return true;
 	    }
@@ -622,6 +625,15 @@
 	      cachedJSON = (window.JSON != null);
 	    }
 	    return cachedJSON;
+	  }
+
+	  /**
+	   * Returns a string where all RegExp special characters are escaped with a \.
+	   * @param {String} text
+	   * @return {string}
+	   */
+	  function escapeRegExpSpecialCharacters(text) {
+	    return text.replace(/[[\]{}()*+?.\\^$|]/g, '\\$&');
 	  }
 
 	  /**
@@ -660,7 +672,7 @@
 	  }
 
 	  function eachKey(fn) {
-	    var prefixRegExp = new RegExp('^' + CACHE_PREFIX + cacheBucket + '(.*)');
+	    var prefixRegExp = new RegExp('^' + CACHE_PREFIX + escapeRegExpSpecialCharacters(cacheBucket) + '(.*)');
 	    // Loop in reverse as removing items will change indices of tail
 	    for (var i = localStorage.length-1; i >= 0 ; --i) {
 	      var key = localStorage.key(i);
