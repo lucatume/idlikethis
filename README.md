@@ -34,6 +34,6 @@ Or rather the ice bucket challenge? [idlikethis]Ice bucket[/idlikethis]
 ```
 
 ## Tests
-The plugin was built to give a concrete example of [dependency injection](!wiki) usage in WordPress with  [DI52](https://github.com/lucatume/DI52) and test-driven development using [wp-browser](https://github.com/lucatume/wp-browser "lucatume/wp-browser · GitHub")
+The plugin was built to give a concrete example of [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection "Dependency injection - Wikipedia, the free encyclopedia") usage in WordPress with  [DI52](https://github.com/lucatume/DI52) and test-driven development using [wp-browser](https://github.com/lucatume/wp-browser "lucatume/wp-browser · GitHub")
 .  
 The test coverage is far from being complete but it contains a lot of hints and practical examples in the `/tests` folder.
