@@ -39,8 +39,7 @@ class idlikethis_Endpoints_ResetAllHandler implements idlikethis_Endpoints_Reset
 
         $exit = $this->comments_repository->reset_votes_for_post($post_id);
 
-        $message = empty($exit) ? 'Could not reset comments for post' : $exit;
-        $status = empty($exit) ? 400 : 200;
+        $status = $exit === false ? 400 : 200;
 
         return new WP_REST_Response($exit, $status, $headers);
     }
