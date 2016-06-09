@@ -4,4 +4,12 @@
 # Emulate web requests and make application process them.
 class_name: FunctionalTester
 modules:
-    enabled: [Filesystem, WPBrowser, WPDb, \Helper\Functional, WPRequests]
+    enabled:
+        - Filesystem
+        - WPBrowser
+        - WPDb
+        - \Helper\Functional
+        - WPRequests
+        - REST
+
+

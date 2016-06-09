@@ -52,3 +52,6 @@ modules:
             adminUsername: admin
             adminPassword: admin
             adminUrl: /wp-admin
+        REST:
+            depends: WPBrowser
+            url: 'http://wp.dev/wp-json/idlikethis/v1'
