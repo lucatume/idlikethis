@@ -32,5 +32,6 @@ class idlikethis_Scripts_BackEndScriptsQ implements idlikethis_Scripts_BackEndSc
         wp_enqueue_script('idlikethis-admin', $bundle_url, array('backbone'), null, true);
         $data = $this->data_provider->get_data();
         wp_localize_script('idlikethis-admin', 'idlikethisData', $data);
+        wp_nonce_field( 'wp_rest', 'rest_nonce' );
     }
 }

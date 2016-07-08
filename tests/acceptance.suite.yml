@@ -5,5 +5,13 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - WPWebDriver
         - \Helper\Acceptance
+        - WPWebDriver:
+            url: 'http://wp.dev'
+            browser: phantomjs
+            port: 4444
+            restart: true
+            wait: 2
+            adminUsername: admin
+            adminPassword: admin
+            adminPath: /wp-admin

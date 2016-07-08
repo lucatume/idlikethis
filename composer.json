@@ -14,6 +14,10 @@
     "lucatume/di52": "~1.3",
     "smarty/smarty": "^3.1"
   },
+  "repositories": [{
+    "type": "git",
+    "url": "/Users/Luca/repos/wp-browser"
+  }],
   "scripts": {
     "post-install-cmd": [
       "xrstf\\Composer52\\Generator::onPostInstallCmd"
@@ -26,7 +30,7 @@
     ]
   },
   "require-dev": {
-    "lucatume/wp-browser": "~1.14",
+    "lucatume/wp-browser": "dev-feature/wp-module",
     "lucatume/function-mocker": "^1.0"
   },
   "autoload": {
