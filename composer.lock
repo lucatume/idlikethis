@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "41603c465a4703f383e534c10b27be02",
-    "content-hash": "5b46b46658f1a3bafd3bc619518e75c6",
+    "hash": "0e66bb25286c03d6a8b4ec8ec6794e19",
+    "content-hash": "b36571f84261fb9608eecabbd56ad680",
     "packages": [
         {
             "name": "lucatume/di52",
@@ -1014,8 +1014,14 @@
             "version": "dev-feature/wp-module",
             "source": {
                 "type": "git",
-                "url": "/Users/Luca/repos/wp-browser",
-                "reference": "f615da25736365ec0f608998bb9cea351b84c442"
+                "url": "https://github.com/lucatume/wp-browser.git",
+                "reference": "cf09f051e4369a1e9c87e2586a060f302b01c390"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/cf09f051e4369a1e9c87e2586a060f302b01c390",
+                "reference": "cf09f051e4369a1e9c87e2586a060f302b01c390",
+                "shasum": ""
             },
             "require": {
                 "lucatume/codeception-setup-local": "~1.0",
@@ -1036,6 +1042,7 @@
                     "tad\\": "src\\tad"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1053,7 +1060,7 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2016-07-04 16:03:32"
+            "time": "2016-07-08 13:39:28"
         },
         {
             "name": "lucatume/wp-browser-commons",
