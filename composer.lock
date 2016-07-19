@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e66bb25286c03d6a8b4ec8ec6794e19",
-    "content-hash": "b36571f84261fb9608eecabbd56ad680",
+    "hash": "38281e83954e94266f057f8843b5bd74",
+    "content-hash": "455223a07f09e43426c9bf5529df9eba",
     "packages": [
         {
             "name": "lucatume/di52",
@@ -575,27 +575,27 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "d094e337976dff9d8e2424e8485872194e768662"
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d094e337976dff9d8e2424e8485872194e768662",
-                "reference": "d094e337976dff9d8e2424e8485872194e768662",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/promises": "~1.0",
-                "guzzlehttp/psr7": "~1.1",
-                "php": ">=5.5.0"
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.3.1",
+                "php": ">=5.5"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "~4.0",
-                "psr/log": "~1.0"
+                "phpunit/phpunit": "^4.0",
+                "psr/log": "^1.0"
             },
             "type": "library",
             "extra": {
@@ -633,7 +633,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-03-21 20:02:09"
+            "time": "2016-07-15 17:22:37"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1011,16 +1011,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "dev-feature/wp-module",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "cf09f051e4369a1e9c87e2586a060f302b01c390"
+                "reference": "bf218674929a4386234d57100be41e25defec3dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/cf09f051e4369a1e9c87e2586a060f302b01c390",
-                "reference": "cf09f051e4369a1e9c87e2586a060f302b01c390",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/bf218674929a4386234d57100be41e25defec3dd",
+                "reference": "bf218674929a4386234d57100be41e25defec3dd",
                 "shasum": ""
             },
             "require": {
@@ -1060,7 +1060,7 @@
                 "codeception",
                 "wordpress"
             ],
-            "time": "2016-07-08 13:39:28"
+            "time": "2016-07-19 14:41:20"
         },
         {
             "name": "lucatume/wp-browser-commons",
@@ -3037,9 +3037,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "lucatume/wp-browser": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
