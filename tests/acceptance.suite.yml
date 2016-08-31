@@ -4,14 +4,18 @@
 # perform tests in browser using WPBrowser or WPWebDriver modules.
 class_name: AcceptanceTester
 modules:
-    enabled:
-        - \Helper\Acceptance
-        - WPWebDriver:
+    config:
+        WPBrowser:
             url: 'http://wp.dev'
-            browser: phantomjs
-            port: 4444
-            restart: true
-            wait: 2
             adminUsername: admin
             adminPassword: admin
-            adminPath: /wp-admin
+            adminUrl: /wp-admin
+        WPDb:
+            dsn: 'mysql:host=127.0.0.1;dbname=wp'
+            user: root
+            password: root
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: true
+            url: 'http://wp.dev'
+            tablePrefix: wp_

@@ -4,4 +4,24 @@
 # Load WordPress and integration test classes that rely on it.
 class_name: IntegrationTester
 modules:
-    enabled: [WPLoader, \Helper\Integration]
+    enabled:
+        - WPLoader
+        - \Helper\Integration
+    config:
+        WPLoader:
+            wpRootFolder: /tmp/wordpress
+            dbName: wploader
+            dbHost: localhost
+            dbUser: root
+            dbPassword: ''
+            wpDebug: true
+            dbCharset: utf8
+            dbCollate: ''
+            tablePrefix: wp_
+            domain: wordpress.dev
+            adminEmail: admin@wordpress.dev
+            title: 'WP Tests'
+            phpBinary: php
+            language: ''
+            plugins: ["idlikethis/idlikethis.php"]
+            activatePlugins: ["idlikethis/idlikethis.php"]

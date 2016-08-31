@@ -4,4 +4,22 @@
 # Emulate web requests and make application process them.
 class_name: FunctionalTester
 modules:
-    enabled: [Filesystem, WPLoader, \Helper\Functional]
+    enabled:
+        - WPDb
+        - WordPress
+        - \Helper\Functional
+    config:
+        WPDb:
+            dsn: 'mysql:host=localhost;dbname=test'
+            user: root
+            password: ''
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: true
+            url: 'http://wordpress.dev'
+            tablePrefix: wp_
+        WordPress:
+            depends: WPDb
+            wpRootFolder: "/tmp/wordpress"
+            adminUsername: 'admin'
+            adminPassword: 'admin'
