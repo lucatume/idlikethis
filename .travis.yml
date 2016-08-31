@@ -68,4 +68,5 @@ before_script:
   - cd $PLUGIN_DIR
 
 script:
+  - curl http://wordpress.dev
   - codecept run -vvv
