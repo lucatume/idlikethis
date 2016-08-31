@@ -30,7 +30,8 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase
         // your set up methods here
         $this->commments_repository = $this->prophesize("idlikethis_Repositories_VotesRepositoryInterface");
         $this->render_engine = $this->prophesize('idlikethis_Templates_RenderEngineInterface');
-        $this->texts_provider = $this->prophesize("idlikethis_Texts_VotesMetaBoxTextProviderInterface");
+        $this->assertTrue(interface_exists('idlikethis_Texts_VotesMetaBoxTextProviderInterface'));
+        $this->texts_provider = $this->prophesize('idlikethis_Texts_VotesMetaBoxTextProviderInterface');
     }
 
     public function tearDown()
