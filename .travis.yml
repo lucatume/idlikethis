@@ -68,4 +68,4 @@ before_script:
   - cd $PLUGIN_DIR
 
 script:
-  - codecept run -vvv
+  - codecept run
