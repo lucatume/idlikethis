@@ -55,7 +55,8 @@ before_script:
   - wp plugin activate idlikethis
 
   # flush rewrite rules
-  - wp rewrite structure '/%postname%'
+  - printf  "apache_modules:\n\t- mod_rewrite" > /tmp/wordpress/config.yml
+  - wp rewrite structure '/%postname%/' --hard
 
   # export a dump of the just installed database to the _data folder
   - cd /tmp/wordpress
