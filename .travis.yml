@@ -48,7 +48,7 @@ before_script:
   - cd /tmp/wordpress
 
   # move the plugin into WordPress folder
-  - mv $TRAVIS_BUILD_DIR /tmp/wordpress/wp-content/plugins
+  - mv $TRAVIS_BUILD_DIR /tmp/wordpress/wp-content/plugins/idlikethis
   - export PLUGIN_DIR="/tmp/wordpress/wp-content/plugins/idlikethis"
 
   # activate the plugin in WordPress
