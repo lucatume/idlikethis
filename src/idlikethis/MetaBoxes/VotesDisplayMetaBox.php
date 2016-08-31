@@ -27,7 +27,11 @@ class idlikethis_MetaBoxes_VotesDisplayMetaBox implements idlikethis_MetaBoxes_V
      */
     protected $template_data;
 
-    public function __construct(idlikethis_Repositories_VotesRepositoryInterface $comments_repository, idlikethis_Templates_RenderEngineInterface $render_engine, idlikethis_Texts_VotesMetaBoxTextProviderInterface $texts)
+    public function __construct(
+        idlikethis_Repositories_VotesRepositoryInterface $comments_repository,
+        idlikethis_Templates_RenderEngineInterface $render_engine,
+        idlikethis_Texts_VotesMetaBoxTextProviderInterface $texts
+    )
     {
         $this->comments_repository = $comments_repository;
         $this->render_engine = $render_engine;
