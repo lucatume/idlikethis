@@ -26,9 +26,8 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase {
 		parent::setUp();
 
 		// your set up methods here
-		$this->commments_repository = $this->prophesize("idlikethis_Repositories_VotesRepositoryInterface");
+		$this->commments_repository = $this->prophesize('idlikethis_Repositories_VotesRepositoryInterface');
 		$this->render_engine = $this->prophesize('idlikethis_Templates_RenderEngineInterface');
-		$this->assertTrue(interface_exists('idlikethis_Texts_VotesMetaBoxTextProviderInterface', true));
 		$this->texts_provider = $this->prophesize('idlikethis_Texts_VotesMetaBoxTextProviderInterface');
 	}
 
