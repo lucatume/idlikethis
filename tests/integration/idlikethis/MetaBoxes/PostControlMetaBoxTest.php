@@ -56,6 +56,10 @@ class PostControlMetaBoxTest extends \Codeception\TestCase\WPTestCase
         $this->assertInstanceOf('idlikethis_MetaBoxes_PostControlMetaBox', $sut);
     }
 
+    private function make_instance() {
+        return new PostControlMetaBox( $this->comments_repository->reveal(), $this->rendering_engine->reveal(), $this->texts_provider->reveal(), $this->context->reveal() );
+    }
+
     /**
      * @test
      * it should show a nothing to control text if there are not idlikethis comments associated to the post
@@ -113,10 +117,5 @@ class PostControlMetaBoxTest extends \Codeception\TestCase\WPTestCase
         $sut = $this->make_instance();
 
         $sut->render($post, []);
-    }
-
-    private function make_instance()
-    {
-        return new PostControlMetaBox($this->comments_repository->reveal(), $this->rendering_engine->reveal(), $this->texts_provider->reveal(), $this->context->reveal());
     }
 }

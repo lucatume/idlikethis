@@ -46,6 +46,10 @@ class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
         $this->assertInstanceOf('idlikethis_Endpoints_ConsolidateAllHandler', $sut);
     }
 
+    private function make_instance() {
+        return new Handler( $this->auth_handler->reveal(), $this->comments_repository->reveal() );
+    }
+
     /**
      * @test
      * it should return 403 response if verification fails
@@ -110,11 +114,6 @@ class ConsolidateAllHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
         $this->assertEquals(200, $out->status);
         $this->assertEquals(true, $out->data);
-    }
-
-    private function make_instance()
-    {
-        return new Handler($this->auth_handler->reveal(), $this->comments_repository->reveal());
     }
 
 }

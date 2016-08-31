@@ -1,8 +1,8 @@
 <?php
 namespace idlikethis\Scripts;
 
-use tad\FunctionMocker\FunctionMocker as Test;
 use idlikethis_Scripts_BackEndScriptsQ as Q;
+use tad\FunctionMocker\FunctionMocker as Test;
 
 class BackEndScriptsQTest extends \Codeception\TestCase\WPTestCase
 {
@@ -47,6 +47,10 @@ class BackEndScriptsQTest extends \Codeception\TestCase\WPTestCase
         $this->assertInstanceOf('idlikethis_Scripts_BackEndScriptsQ', $sut);
     }
 
+    private function make_instance() {
+        return new Q( $this->plugin->reveal(), $this->data_provider->reveal() );
+    }
+
     /**
      * @test
      * it should q the standard version of the script
@@ -80,12 +84,6 @@ class BackEndScriptsQTest extends \Codeception\TestCase\WPTestCase
 
         $wp_localize_script->wasCalledWithOnce(['idlikethis-admin', 'idlikethisData', $data]);
 
-    }
-
-
-    private function make_instance()
-    {
-        return new Q($this->plugin->reveal(), $this->data_provider->reveal());
     }
 
 }

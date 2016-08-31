@@ -38,6 +38,10 @@ class PluginTest extends \Codeception\TestCase\WPTestCase
         $this->assertInstanceOf('idlikethis_Plugin', $sut);
     }
 
+    private function make_instance() {
+        return new Plugin();
+    }
+
     /**
      * @test
      * it should throw if trying to get dir_path of non string
@@ -88,10 +92,5 @@ class PluginTest extends \Codeception\TestCase\WPTestCase
         $out = $sut->dir_url('some/frag.extension');
 
         $this->assertEquals(plugin_dir_url($this->root_dir) . 'some/frag.extension', $out);
-    }
-
-    private function make_instance()
-    {
-        return new Plugin();
     }
 }

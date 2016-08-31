@@ -45,6 +45,10 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
         $sut = $this->make_instance();
     }
 
+    protected function make_instance() {
+        return new ButtonClickHandler( $this->auth_handler->reveal(), $this->comment_repository->reveal() );
+    }
+
     /**
      * @test
      * it should return 403 response if verification fails
@@ -126,11 +130,6 @@ class ButtonClickHandlerTest extends \Codeception\TestCase\WPRestApiTestCase
 
         $this->assertEquals(200, $out->status);
         $this->assertEquals(112, $out->data);
-    }
-
-    protected function make_instance()
-    {
-        return new ButtonClickHandler($this->auth_handler->reveal(), $this->comment_repository->reveal());
     }
 
 }

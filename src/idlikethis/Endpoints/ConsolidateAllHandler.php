@@ -39,7 +39,6 @@ class idlikethis_Endpoints_ConsolidateAllHandler implements idlikethis_Endpoints
 
         $exit = $this->comments_repository->consolidate_votes_for_post($post_id);
 
-        $message = empty($exit) ? 'Could not consolidate comments for post' : $exit;
         $status = empty($exit) ? 400 : 200;
 
         return new WP_REST_Response($exit, $status, $headers);
