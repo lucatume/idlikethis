@@ -54,6 +54,9 @@ before_script:
   # activate the plugin in WordPress
   - wp plugin activate idlikethis
 
+  # flush rewrite rules
+  - wp rewrite structure '%postname%' --hard
+
   # export a dump of the just installed database to the _data folder
   - cd /tmp/wordpress
   - wp db export $PLUGIN_DIR/tests/_data/dump.sql
