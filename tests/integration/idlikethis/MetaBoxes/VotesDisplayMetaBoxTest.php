@@ -2,22 +2,25 @@
 namespace idlikethis\MetaBoxes;
 
 use idlikethis_MetaBoxes_VotesDisplayMetaBox as VotesDisplayMetaBox;
+use idlikethis_Repositories_VotesRepositoryInterface as VotesRepositoryInterface;
+use idlikethis_Templates_RenderEngineInterface as RenderEngineInterface;
+use idlikethis_Texts_VotesMetaBoxTextProviderInterface as VotesMetaBoxTextProviderInterface;
 use Prophecy\Argument;
 
 class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase {
 
 	/**
-	 * @var \idlikethis_Repositories_VotesRepositoryInterface
+	 * @var VotesRepositoryInterface
 	 */
 	protected $commments_repository;
 
 	/**
-	 * @var \idlikethis_Texts_VotesMetaBoxTextProviderInterface
+	 * @var VotesMetaBoxTextProviderInterface
 	 */
 	protected $texts_provider;
 
 	/**
-	 * @var \idlikethis_Templates_RenderEngineInterface
+	 * @var RenderEngineInterface
 	 */
 	protected $render_engine;
 
@@ -27,13 +30,13 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase {
 
 		// your set up methods here
 		$this->commments_repository = $this->prophesize(
-			\idlikethis_Repositories_VotesRepositoryInterface::class
+			VotesRepositoryInterface::class
 		);
 		$this->render_engine = $this->prophesize(
-			\idlikethis_Templates_RenderEngineInterface::class
+			RenderEngineInterface::class
 		);
 		$this->texts_provider = $this->prophesize(
-			\idlikethis_Texts_VotesMetaBoxTextProviderInterface::class
+			VotesMetaBoxTextProviderInterface::class
 		);
 	}
 
