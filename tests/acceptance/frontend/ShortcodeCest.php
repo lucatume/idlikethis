@@ -14,7 +14,7 @@ class ShortcodeCest
         $post_id = $I->havePostInDatabase(['post_name' => 'foo', 'post_content' => $content]);
 
         $I->amOnPage('/foo');
-        $text = "I'd like this";
+        $text = htmlspecialchars("I'd like this");
         $I->seeElement('.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button');
     }
 
@@ -28,7 +28,7 @@ class ShortcodeCest
         $post_id = $I->havePostInDatabase(['post_name' => 'foo', 'post_content' => $content]);
 
         $I->amOnPage('/foo');
-        $text = "Some idea of mine";
+        $text = htmlspecialchars("Some idea of mine");
         $I->seeElement('.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button');
     }
 }
