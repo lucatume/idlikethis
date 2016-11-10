@@ -1,5 +1,7 @@
 # I'd like this
 
+![Travis CI Build Status](https://travis-ci.org/lucatume/idlikethis.svg?branch=master)
+
 *Add an "I'd like this" button anywhere in a WordPress post and get user feedback on your ideas, proposals and plans.*
 
 This plugin was built to give a concrete example of [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection "Dependency injection - Wikipedia, the free encyclopedia") usage in WordPress with  [DI52](https://github.com/lucatume/DI52) and test-driven development using [Codeception](http://codeception.com/ "Codeception - BDD-style PHP testing.") and [wp-browser](https://github.com/lucatume/wp-browser "lucatume/wp-browser · GitHub")

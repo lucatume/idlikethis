@@ -1,0 +1,25 @@
+# Codeception Test Suite Configuration
+
+# suite for WordPress acceptance tests.
+# perform tests in browser using WPBrowser or WPWebDriver modules.
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - \Helper\Acceptance
+        - WPBrowser
+        - WPDb
+    config:
+        WPBrowser:
+            url: 'http://wordpress.dev'
+            adminUsername: admin
+            adminPassword: admin
+            adminUrl: /wp-admin
+        WPDb:
+            dsn: 'mysql:host=localhost;dbname=test'
+            user: root
+            password: ''
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: true
+            url: 'http://wordpress.dev'
+            tablePrefix: wp_

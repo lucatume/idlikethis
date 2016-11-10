@@ -5,18 +5,21 @@
 class_name: FunctionalTester
 modules:
     enabled:
-        - WPDb:
-            dsn: 'mysql:host=127.0.0.1;dbname=wp'
+        - WPDb
+        - WordPress
+        - \Helper\Functional
+    config:
+        WPDb:
+            dsn: 'mysql:host=localhost;dbname=test'
             user: root
-            password: root
+            password: ''
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-            url: 'http://wp.dev'
+            url: 'http://wordpress.dev'
             tablePrefix: wp_
-        - WordPress:
+        WordPress:
             depends: WPDb
-            wpRootFolder: "/Users/Luca/Sites/wp"
+            wpRootFolder: "/tmp/wordpress"
             adminUsername: 'admin'
             adminPassword: 'admin'
-        - \Helper\Functional
