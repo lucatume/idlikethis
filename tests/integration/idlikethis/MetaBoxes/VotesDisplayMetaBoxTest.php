@@ -54,17 +54,12 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase {
 	public function it_should_be_instantiatable() {
 		$sut = $this->make_instance();
 
-		$this->assertInstanceOf(
-			VotesDisplayMetaBox::class,
-			$sut
-		);
+		$this->assertInstanceOf( VotesDisplayMetaBox::class, $sut );
 	}
 
 	private function make_instance() {
 		return new VotesDisplayMetaBox(
-			$this->commments_repository->reveal(),
-			$this->render_engine->reveal(),
-			$this->texts_provider->reveal()
+			$this->commments_repository->reveal(), $this->render_engine->reveal(), $this->texts_provider->reveal()
 		);
 	}
 
@@ -77,15 +72,11 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase {
 
 		$this->commments_repository->get_votes_for_post( $post )->willReturn( [] );
 		$this->texts_provider->get_empty_comments_text()->shouldBeCalled();
-		$this->render_engine->render(
-			Argument::any(),
-			Argument::any()
-		)->shouldBeCalled();
+		$this->render_engine->render( Argument::any(), Argument::any() )->shouldBeCalled();
 
 		$sut = $this->make_instance();
 		$sut->render(
-			$post,
-			[]
+			$post, []
 		);
 	}
 
@@ -101,23 +92,17 @@ class VotesDisplayMetaBoxTest extends \Codeception\TestCase\WPTestCase {
 		$this->commments_repository->get_votes_for_post( $post )->willReturn(
 			[
 				'first idea'  => array_splice(
-					$comments,
-					0,
-					5
+					$comments, 0, 5
 				),
 				'second idea' => $comments
 			]
 		);
 		$this->texts_provider->get_comments_title_text()->shouldBeCalled();
-		$this->render_engine->render(
-			Argument::any(),
-			Argument::any()
-		)->shouldBeCalled();
+		$this->render_engine->render( Argument::any(), Argument::any() )->shouldBeCalled();
 
 		$sut = $this->make_instance();
 		$sut->render(
-			$post,
-			[]
+			$post, []
 		);
 	}
 
