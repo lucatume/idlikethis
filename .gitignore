@@ -7,3 +7,4 @@ vendor/
 # composer.lock
 
 node_modules
+tests/_output
