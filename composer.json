@@ -27,7 +27,8 @@
   },
   "require-dev": {
     "lucatume/wp-browser": "^1.15.0",
-    "lucatume/function-mocker": "^1.0"
+    "lucatume/function-mocker": "^1.0",
+    "site5/phantoman": "^1.1"
   },
   "autoload": {
     "psr-0": {

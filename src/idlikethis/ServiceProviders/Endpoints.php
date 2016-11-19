@@ -8,7 +8,7 @@ class idlikethis_ServiceProviders_Endpoints extends tad_DI52_ServiceProvider
      */
     public function register()
     {
-        $this->container->set_var('endpoints-namespace', 'idlikethis/v1');
+        $this->container->setVar('endpoints-namespace', 'idlikethis/v1');
 
         $this->container->singleton('idlikethis_Endpoints_AuthHandlerInterface', 'idlikethis_Endpoints_AuthHandler');
         $this->container->singleton('idlikethis_Endpoints_PostAdminAuthHandlerInterface', 'idlikethis_Endpoints_PostAdminAuthHandler');
@@ -22,7 +22,7 @@ class idlikethis_ServiceProviders_Endpoints extends tad_DI52_ServiceProvider
 
     public function register_endpoints()
     {
-        $namespace = $this->container->get_var('endpoints-namespace');
+        $namespace = $this->container->getVar('endpoints-namespace');
 
         register_rest_route($namespace, '/button-click', array(
             'methods' => 'POST',
