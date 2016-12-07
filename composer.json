@@ -10,7 +10,6 @@
     }
   ],
   "minimum-stability": "dev",
-  "prefer-stable": true,
   "require": {
     "lucatume/di52": "~1.3",
     "smarty/smarty": "^3.1"
