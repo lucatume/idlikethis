@@ -26,8 +26,7 @@
     ]
   },
   "require-dev": {
-    "lucatume/wp-browser": "^1.15.0",
-    "lucatume/function-mocker": "^1.1.0",
+    "lucatume/wp-browser": "^1.19.5",
     "site5/phantoman": "^1.1"
   },
   "autoload": {
