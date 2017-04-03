@@ -13,6 +13,7 @@ class idlikethis_ServiceProviders_Shortcodes extends tad_DI52_ServiceProvider
 
         $this->container->singleton('idlikethis_Texts_ShortcodeTextProviderInterface', 'idlikethis_Texts_ShortcodeTextProvider');
 
+        require dirname(dirname(dirname(dirname(__FILE__)))) . '/vendor/smarty/smarty/libs/bootstrap.php';
         $smarty = new Smarty();
         $smarty->setTemplateDir($templates_dir);
         $smarty->setCacheDir($templates_dir . DIRECTORY_SEPARATOR . '_cache');
