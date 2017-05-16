@@ -83,7 +83,5 @@ class BackEndScriptsQTest extends \Codeception\TestCase\WPTestCase
         $sut->enqueue();
 
         $wp_localize_script->wasCalledWithOnce(['idlikethis-admin', 'idlikethisData', $data]);
-
     }
-
 }
