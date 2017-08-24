@@ -15,3 +15,4 @@ tests/functional.suite.yml
 tests/integration.suite.yml
 tests/unit.suite.yml
 codeception.yml
+templates_c

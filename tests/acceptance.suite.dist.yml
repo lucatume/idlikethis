@@ -10,16 +10,16 @@ modules:
         - WPDb
     config:
         WPBrowser:
-            url: 'http://wordpress.dev'
+            url: 'http://wp.localhost'
             adminUsername: admin
             adminPassword: admin
             adminUrl: /wp-admin
         WPDb:
-            dsn: 'mysql:host=localhost;dbname=test'
+            dsn: 'mysql:host=db.localhost;dbname=wp'
             user: root
-            password: ''
+            password: root
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-            url: 'http://wordpress.dev'
+            url: 'http://wp.localhost'
             tablePrefix: wp_

@@ -9,19 +9,15 @@ modules:
         - \Helper\Integration
     config:
         WPLoader:
-            wpRootFolder: /tmp/wordpress
-            dbName: wploader
-            dbHost: localhost
+            wpRootFolder: /Users/luca/Sites/wp/www
+            dbName: wpTests
+            dbHost: db.localhost
             dbUser: root
-            dbPassword: ''
+            dbPassword: root
             wpDebug: true
-            dbCharset: utf8
-            dbCollate: ''
             tablePrefix: wp_
-            domain: wordpress.dev
-            adminEmail: admin@wordpress.dev
+            domain: wp.localhost
+            adminEmail: admin@wp.localhost
             title: 'WP Tests'
-            phpBinary: php
-            language: ''
             plugins: ["idlikethis/idlikethis.php"]
             activatePlugins: ["idlikethis/idlikethis.php"]

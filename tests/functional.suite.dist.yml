@@ -10,16 +10,16 @@ modules:
         - \Helper\Functional
     config:
         WPDb:
-            dsn: 'mysql:host=localhost;dbname=test'
+            dsn: 'mysql:host=db.localhost;dbname=wp'
             user: root
-            password: ''
+            password: root
             dump: tests/_data/dump.sql
             populate: true
             cleanup: true
-            url: 'http://wordpress.dev'
+            url: 'http://wp.localhost'
             tablePrefix: wp_
         WordPress:
             depends: WPDb
-            wpRootFolder: "/tmp/wordpress"
+            wpRootFolder: "/Users/luca/Sites/wp/www"
             adminUsername: 'admin'
             adminPassword: 'admin'
