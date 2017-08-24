@@ -16,6 +16,7 @@ class idlikethis_ServiceProviders_Endpoints extends tad_DI52_ServiceProvider
         $this->container->singleton('idlikethis_Endpoints_ButtonClickHandlerInterface', 'idlikethis_Endpoints_ButtonClickHandler');
         $this->container->singleton('idlikethis_Endpoints_ResetAllHandlerInterface', 'idlikethis_Endpoints_ResetAllHandler');
         $this->container->singleton('idlikethis_Endpoints_ConsolidateAllHandlerInterface', 'idlikethis_Endpoints_ConsolidateAllHandler');
+	    $this->container->singleton('idlikethis_Endpoints_CleanShortcodesHandlerInterface', 'idlikethis_Endpoints_CleanShortcodesHandler');
 
         add_action('rest_api_init', array($this, 'register_endpoints'));
     }

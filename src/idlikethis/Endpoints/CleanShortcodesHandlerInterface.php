@@ -1,0 +1,4 @@
+<?php
+interface idlikethis_Endpoints_CleanShortcodesHandlerInterface extends idlikethis_Endpoints_HandlerInterface {
+
+}
