@@ -20,8 +20,7 @@ class ConsolidateAllPostRequestCest {
 		$wp_rest_nonce = $I->grabValueFrom( 'input[name="rest_nonce"]' );
 		$I->haveHttpHeader( 'X-WP-Nonce', $wp_rest_nonce );
 
-		$I->sendAjaxPostRequest( '/wp-json/idlikethis/v1/admin/consolidate-all', [
-		] );
+		$I->sendAjaxPostRequest( '/wp-json/idlikethis/v1/admin/consolidate-all');
 
 		$I->seeResponseCodeIs( 400 );
 		foreach ( $comment_ids as $comment_id ) {

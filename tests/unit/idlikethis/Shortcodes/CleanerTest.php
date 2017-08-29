@@ -19,14 +19,14 @@ class CleanerTest extends \Codeception\Test\Unit {
 	protected $repository;
 
 	protected function _before() {
-		$this->repository = $this->prophesize(\idlikethis_Repositories_PostRepositoryInterface::class);
+		$this->repository = $this->prophesize( \idlikethis_Repositories_PostRepositoryInterface::class );
 	}
 
 	/**
 	 * @return Cleaner
 	 */
 	private function make_instance() {
-		return new Cleaner($this->repository->reveal());
+		return new Cleaner( $this->repository->reveal() );
 	}
 
 	/**
@@ -36,7 +36,7 @@ class CleanerTest extends \Codeception\Test\Unit {
 	public function it_should_be_instantiatable() {
 		$sut = $this->make_instance();
 
-		$this->assertInstanceOf(Cleaner::class, $sut);
+		$this->assertInstanceOf( Cleaner::class, $sut );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class CleanerTest extends \Codeception\Test\Unit {
 	 * @test
 	 */
 	public function should_remove_shortcodes_from_all_posts() {
-		$contents_map                 = [
+		$contents_map = [
 			1 => 'Lorem dolor',
 			2 => 'Lorem dolor[idlikethis]',
 			3 => 'Lorem dolor[idlikethis] ipsum',
@@ -67,19 +67,20 @@ class CleanerTest extends \Codeception\Test\Unit {
 			8 => 'Lorem dolor Lorem dolor',
 			9 => 'Lorem dolor ipsum Lorem dolor ipsum',
 		];
-		$post_ids                     = array_keys($contents_map);
-		$this->repository->get_posts_with_shortcodes()->willReturn($post_ids);
-		$this->repository->get_post_content(Argument::type('int'))->will(function ($args) use ($contents_map) {
-			$post_id = reset($args);
-			return $contents_map[$post_id];
+		$post_ids = array_keys( $contents_map );
+		$this->repository->get_posts_with_shortcodes()->willReturn( $post_ids );
+		$this->repository->get_post_content( Argument::type( 'int' ) )->will( function ( $args ) use ( $contents_map ) {
+			$post_id = reset( $args );
 
-		});
+			return $contents_map[ $post_id ];
 
-		$this->repository->set_post_content(Argument::type('int'), Argument::type('string'))
-						 ->will(function ($args) use ($expected_updated_content_map) {
-							 list($post_id, $post_content) = $args;
-							 Assert::assertEquals($expected_updated_content_map[$post_id], $post_content);
-						 });
+		} );
+
+		$this->repository->set_post_content( Argument::type( 'int' ), Argument::type( 'string' ) )
+		                 ->will( function ( $args ) use ( $expected_updated_content_map ) {
+			                 list( $post_id, $post_content ) = $args;
+			                 Assert::assertEquals( $expected_updated_content_map[ $post_id ], $post_content );
+		                 } );
 
 		$sut = $this->make_instance();
 
@@ -97,15 +98,16 @@ class CleanerTest extends \Codeception\Test\Unit {
 			2 => 'Lorem dolor',
 			3 => 'Lorem dolor ipsum',
 		];
-		$post_ids                     = array_keys($contents_map);
-		$this->repository->get_posts_with_shortcodes()->willReturn($post_ids);
-		$this->repository->get_post_content(Argument::type('int'))->will(function ($args) use ($contents_map) {
-			$post_id = reset($args);
-			return $contents_map[$post_id];
+		$post_ids     = array_keys( $contents_map );
+		$this->repository->get_posts_with_shortcodes()->willReturn( $post_ids );
+		$this->repository->get_post_content( Argument::type( 'int' ) )->will( function ( $args ) use ( $contents_map ) {
+			$post_id = reset( $args );
 
-		});
+			return $contents_map[ $post_id ];
 
-		$this->repository->set_post_content(Argument::type('int'), Argument::type('string'))->shouldNotBeCalled();
+		} );
+
+		$this->repository->set_post_content( Argument::type( 'int' ), Argument::type( 'string' ) )->shouldNotBeCalled();
 
 		$sut = $this->make_instance();
 
@@ -118,9 +120,9 @@ class CleanerTest extends \Codeception\Test\Unit {
 	 * @test
 	 */
 	public function should_not_update_any_post_content_if_there_are_no_posts() {
-		$this->repository->get_posts_with_shortcodes()->willReturn([]);
-		$this->repository->get_post_content(Argument::type('int'))->shouldNotBeCalled();
-		$this->repository->set_post_content(Argument::type('int'), Argument::type('string'))->shouldNotBeCalled();
+		$this->repository->get_posts_with_shortcodes()->willReturn( [] );
+		$this->repository->get_post_content( Argument::type( 'int' ) )->shouldNotBeCalled();
+		$this->repository->set_post_content( Argument::type( 'int' ), Argument::type( 'string' ) )->shouldNotBeCalled();
 
 		$sut = $this->make_instance();
 

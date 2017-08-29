@@ -39,6 +39,11 @@ class idlikethis_ServiceProviders_Endpoints extends tad_DI52_ServiceProvider
             'methods' => 'POST',
             'callback' => array($this->container->make('idlikethis_Endpoints_ConsolidateAllHandlerInterface'), 'handle'),
         ));
+
+		register_rest_route($namespace, '/admin/clean-all', array(
+			'methods' => 'POST',
+			'callback' => array($this->container->make('idlikethis_Endpoints_CleanShortcodesHandlerInterface'), 'handle'),
+		));
     }
 
     /**
