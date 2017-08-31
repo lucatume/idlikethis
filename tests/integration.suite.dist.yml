@@ -9,15 +9,15 @@ modules:
         - \Helper\Integration
     config:
         WPLoader:
-            wpRootFolder: /Users/luca/Sites/wp/www
-            dbName: wpTests
-            dbHost: db.localhost
-            dbUser: root
-            dbPassword: root
+            wpRootFolder: "%WP_ROOT%"
+            dbName: %TEST_DB_NAME%
+            dbHost: %DB_HOST%
+            dbUser: %DB_USER%
+            dbPassword: %DB_PASSWORD%
             wpDebug: true
             tablePrefix: wp_
-            domain: wp.localhost
-            adminEmail: admin@wp.localhost
+            domain: %WP_DOMAIN%
+            adminEmail: admin@%WP_DOMAIN%
             title: 'WP Tests'
             plugins: ["idlikethis/idlikethis.php"]
             activatePlugins: ["idlikethis/idlikethis.php"]

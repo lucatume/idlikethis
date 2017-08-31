@@ -16,3 +16,5 @@ extensions:
             path: 'vendor/bin/phantomjs'
             port: 4444
             suites: ['phantomjs']
+params:
+  - .env
