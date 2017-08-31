@@ -20,8 +20,8 @@ class BackEndScriptsQTest extends \Codeception\Test\Unit {
 	protected $data_provider;
 
 	public function _before() {
-		$this->plugin        = $this->prophesize('idlikethis_plugin');
-		$this->data_provider = $this->prophesize('idlikethis_scripts_backenddataproviderinterface');
+		$this->plugin        = $this->prophesize('idlikethis_Plugin');
+		$this->data_provider = $this->prophesize('idlikethis_Scripts_BackEndDataProviderInterface');
 		defineAll(['wp_localize_script', 'wp_nonce_field'], function () {
 			return true;
 		});
@@ -33,7 +33,7 @@ class BackEndScriptsQTest extends \Codeception\Test\Unit {
 	 */
 	public function it_should_be_instantiatable() {
 		$sut = $this->make_instance();
-		$this->assertinstanceof('idlikethis_scripts_backendscriptsq', $sut);
+		$this->assertinstanceof('idlikethis_Scripts_BackEndScriptsQ', $sut);
 	}
 
 	private function make_instance() {
