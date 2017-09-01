@@ -10,9 +10,6 @@ vendor/
 
 node_modules
 tests/_output
-tests/acceptance.suite.yml
-tests/functional.suite.yml
-tests/integration.suite.yml
-tests/unit.suite.yml
 codeception.yml
+.env.local
 templates_c
