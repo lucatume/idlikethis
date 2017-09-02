@@ -137,16 +137,16 @@
     "packages-dev": [
         {
             "name": "antecedent/patchwork",
-            "version": "2.1.3",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antecedent/patchwork.git",
-                "reference": "d1adfad06b2138439c5ee3221a2f07f51567404e"
+                "reference": "8b5fb587be912ee0cdc4c3ce145ef237ac9807f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/d1adfad06b2138439c5ee3221a2f07f51567404e",
-                "reference": "d1adfad06b2138439c5ee3221a2f07f51567404e",
+                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/8b5fb587be912ee0cdc4c3ce145ef237ac9807f8",
+                "reference": "8b5fb587be912ee0cdc4c3ce145ef237ac9807f8",
                 "shasum": ""
             },
             "require": {
@@ -174,7 +174,7 @@
                 "runkit",
                 "testing"
             ],
-            "time": "2017-08-30T13:30:13+00:00"
+            "time": "2017-09-02T05:34:56+00:00"
         },
         {
             "name": "bacon/bacon-string-utils",
@@ -1339,16 +1339,16 @@
         },
         {
             "name": "lucatume/function-mocker-le",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/function-mocker-le.git",
-                "reference": "d56c28d9a7558dbef75f1a9cb23b981d71f9dd7b"
+                "reference": "20e12ae2e6350c5b11a6bdbe763c749f7f88603e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/function-mocker-le/zipball/d56c28d9a7558dbef75f1a9cb23b981d71f9dd7b",
-                "reference": "d56c28d9a7558dbef75f1a9cb23b981d71f9dd7b",
+                "url": "https://api.github.com/repos/lucatume/function-mocker-le/zipball/20e12ae2e6350c5b11a6bdbe763c749f7f88603e",
+                "reference": "20e12ae2e6350c5b11a6bdbe763c749f7f88603e",
                 "shasum": ""
             },
             "require": {
@@ -1374,7 +1374,7 @@
                 }
             ],
             "description": "A lightweight function mocking solution.",
-            "time": "2017-08-30T16:46:44+00:00"
+            "time": "2017-09-02T10:37:47+00:00"
         },
         {
             "name": "lucatume/wp-browser",

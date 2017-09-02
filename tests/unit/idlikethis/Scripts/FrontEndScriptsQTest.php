@@ -6,6 +6,7 @@ use idlikethis_Scripts_FrontEndScriptsQ as Q;
 use PHPUnit\Framework\Assert;
 use function tad\FunctionMockerLe\define;
 use function tad\FunctionMockerLe\defineAll;
+use function tad\FunctionMockerLe\undefineAll;
 
 class FrontEndScriptsQTest extends \Codeception\Test\Unit {
 
@@ -20,10 +21,11 @@ class FrontEndScriptsQTest extends \Codeception\Test\Unit {
 	protected $data_provider;
 
 	public function _before() {
+		undefineAll();
 		// your set up methods here
 		$this->plugin        = $this->prophesize('idlikethis_Plugin');
 		$this->data_provider = $this->prophesize('idlikethis_Scripts_FrontEndDataProviderInterface');
-		defineAll(['wp_localize_script', 'wp_nonce_field'], function () {
+		defineAll(['wp_localize_script', 'wp_nonce_field', 'wp_enqueue_script'], function () {
 			return true;
 		});
 	}
