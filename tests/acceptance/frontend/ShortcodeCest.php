@@ -1,4 +1,5 @@
 <?php
+
 namespace acceptance\frontend;
 
 class ShortcodeCest {
@@ -21,11 +22,11 @@ class ShortcodeCest {
 	 * it should render extended shortcode
 	 */
 	public function it_should_render_extended_shortcode(\AcceptanceTester $I) {
-		$content = 'Lorem ipsum [idlikethis]Some idea of mine[/idlikethis]';
+		$text    = 'Some idea of mine';
+		$content = 'Lorem ipsum [idlikethis]' . $text . '[/idlikethis]';
 		$post_id = $I->havePostInDatabase(['post_name' => 'foo', 'post_content' => $content]);
 
 		$I->amOnPage('/?p=' . $post_id);
-		$text = "Some idea of mine";
 		$I->seeElement('.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button');
 	}
 }
