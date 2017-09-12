@@ -31,7 +31,8 @@
     "lucatume/wp-browser": "^1.19.5",
     "site5/phantoman": "^1.1",
     "lucatume/function-mocker": "^1.1",
-    "jakoch/phantomjs-installer": "^2.1"
+    "jakoch/phantomjs-installer": "^2.1",
+    "vlucas/phpdotenv": "^2.4"
   },
   "autoload": {
     "psr-0": {

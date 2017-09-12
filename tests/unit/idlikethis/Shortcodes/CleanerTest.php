@@ -68,14 +68,18 @@ class CleanerTest extends \Codeception\Test\Unit {
 			9 => 'Lorem dolor ipsum Lorem dolor ipsum',
 		];
 		$post_ids = array_keys( $contents_map );
+
+		// mocking
 		$this->repository->get_posts_with_shortcodes()->willReturn( $post_ids );
+
+		// mocking
 		$this->repository->get_post_content( Argument::type( 'int' ) )->will( function ( $args ) use ( $contents_map ) {
 			$post_id = reset( $args );
 
 			return $contents_map[ $post_id ];
-
 		} );
 
+		// spying
 		$this->repository->set_post_content( Argument::type( 'int' ), Argument::type( 'string' ) )
 		                 ->will( function ( $args ) use ( $expected_updated_content_map ) {
 			                 list( $post_id, $post_content ) = $args;
