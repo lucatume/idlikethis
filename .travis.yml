@@ -95,7 +95,8 @@ before_script:
   - codecept build
 
 script:
-  - codecept run acceptance -vvv
-  - codecept run functional -vvv
-  - codecept run integration
-  - codecept run unit
+  - curl wp.localhost
+#  - codecept run acceptance -vvv
+#  - codecept run functional -vvv
+#  - codecept run integration
+#  - codecept run unit
