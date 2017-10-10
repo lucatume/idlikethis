@@ -6,72 +6,96 @@ notifications:
   email: false
 
 php:
-  - '5.6'
   - '7.0'
+  - '7.1'
+  - nightly
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: nightly
+    - env: WP_VERSION=nightly
 
 services:
   - mysql
 
 cache:
+  apt: true
   directories:
     - vendor
-    - $HOME/.composer/cache
+    - $HOME/.composer/cache/files
+
+addons:
+  apt:
+    packages:
+      - libjpeg-dev
+      - libpng12-dev
+      - php5-fpm
+      - php5-mysql
+      - nginx
+  hosts:
+    - wp.localhost
 
 env:
-  - wpDbName=test wpLoaderDbName=wploader wpDbPrefix=wp_ wpUrl=wordpress.dev wpAdminUsername=admin wpAdminPassword=admin
+  global:
+    - WP_FOLDER="/tmp/wordpress"
+    - WP_URL="http://wp.localhost"
+    - WP_DOMAIN="wp.localhost"
+    - DB_NAME="test"
+    - TEST_DB_NAME="wploader"
+    - WP_TABLE_PREFIX="wp_"
+    - WP_ADMIN_USERNAME="admin"
+    - WP_ADMIN_PASSWORD="admin"
+  matrix:
+    - WP_VERSION=latest
+    - WP_VERSION=nightly
 
 before_install:
-  - mysql -e "create database IF NOT EXISTS $wpDbName;" -uroot
-  - mysql -e "create database IF NOT EXISTS $wpLoaderDbName;" -uroot
+  # create the databases that will be used in the tests
+  - mysql -e "create database IF NOT EXISTS $DB_NAME;" -uroot
+  - mysql -e "create database IF NOT EXISTS $TEST_DB_NAME;" -uroot
+  # set up folders
+  - mkdir -p $WP_FOLDER
+  - mkdir tools
+  # install wp-cli in the `tools` folder
+  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P $(pwd)/tools/
+  - chmod +x tools/wp-cli.phar && mv tools/wp-cli.phar tools/wp
+  # append the `tools` folder to the PATH
+  - export PATH=$PATH:$(pwd)/tools
+  # prepend the `vendor/bin` folder the PATH
+  - export PATH=vendor/bin:$PATH
 
 install:
-  - composer update --prefer-dist
+  - composer install --prefer-dist
+  # install WordPress
+  - cd $WP_FOLDER
+  - wp core download --version=$WP_VERSION
+  - wp config create --dbname="$DB_NAME" --dbuser="root" --dbpass="" --dbhost="127.0.0.1" --dbprefix="$WP_TABLE_PREFIX"
+  - wp core multisite-install --url="$WP_URL" --base="/" --subdomains --title="Test" --admin_user="$WP_ADMIN_USERNAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="admin@$WP_DOMAIN" --skip-email
+  - wp rewrite structure '/%postname%/' --hard
+  # update WordPress database to avoid prompts
+  - wp core update-db
+  # export a dump of the just installed database to the _data folder
+  - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
+  # get back to the build folder
+  - cd $TRAVIS_BUILD_DIR
+  # copy the Nginx configuration file to the available sites
+  - sudo cp build/travis-nginx-conf /etc/nginx/sites-available/$WP_DOMAIN
+  - sudo sed -e "s?%WP_FOLDER%?$WP_FOLDER?g" --in-place /etc/nginx/sites-available/$WP_DOMAIN
+  - sudo sed -e "s?%WP_DOMAIN%?$WP_DOMAIN?g" --in-place /etc/nginx/sites-available/$WP_DOMAIN
+  # enable the site
+  - sudo ln -s /etc/nginx/sites-available/$WP_DOMAIN /etc/nginx/sites-enabled/
 
 before_script:
-  # set up folders
-  - mkdir -p $HOME/tools /tmp/wordpress
+  # restart Nnginx and PHP-FPM services
+  - sudo service php5-fpm restart
+  - sudo service nginx restart
 
-  # install wp-cli
-  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P /tmp/tools/
-  - chmod +x /tmp/tools/wp-cli.phar && mv /tmp/tools/wp-cli.phar /tmp/tools/wp
-  - export PATH=$PATH:/tmp/tools:vendor/bin
-
-  # install Apache and WordPress setup scripts
-  - git clone https://github.com/lucatume/travis-apache-setup.git /tmp/tools/travis-apache-setup
-  - chmod +x /tmp/tools/travis-apache-setup/apache-setup.sh
-  - chmod +x /tmp/tools/travis-apache-setup/wp-install.sh
-  - ln -s /tmp/tools/travis-apache-setup/apache-setup.sh /tmp/tools/apache-setup
-  - ln -s /tmp/tools/travis-apache-setup/wp-install.sh /tmp/tools/wp-install
-
-  # download and install WordPress
-  - wp-install --dir=/tmp/wordpress --dbname="$wpDbName" --dbuser="root" --dbpass="" --dbprefix=wp_ --domain="wordpress.dev" --title="Test" --admin_user=admin --admin_password=admin --admin_email=admin@wordpress.dev --theme=twentysixteen --empty 
-  - cd /tmp/wordpress
-
-  # move the plugin into WordPress folder
-  - mv $TRAVIS_BUILD_DIR /tmp/wordpress/wp-content/plugins/idlikethis
-  - export PLUGIN_DIR="/tmp/wordpress/wp-content/plugins/idlikethis"
-
-  # activate the plugin in WordPress
-  - wp plugin activate idlikethis
-
-  # flush rewrite rules
-  - printf  "apache_modules:\n\t- mod_rewrite" > /tmp/wordpress/wp-cli.yml
-  - wp rewrite structure '/%postname%/' --hard
-
-  # export a dump of the just installed database to the _data folder
-  - cd /tmp/wordpress
-  - wp db export $PLUGIN_DIR/tests/_data/dump.sql
-
-  # set up Apache virtual host
-  - sudo env "PATH=$PATH" apache-setup --host="127.0.0.1" --url="$wpUrl" --dir="/tmp/wordpress" 
-
-  # Get back to the plugin dir
-  - cd $PLUGIN_DIR
+  # build Codeception modules
+  - codecept build
 
 script:
-  - codecept run unit
-  - codecept run integration
-  - codecept run functional
   - codecept run acceptance
-
-
+  - codecept run functional
+  - codecept run integration
+  - codecept run unit

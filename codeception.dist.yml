@@ -10,11 +10,10 @@ settings:
     memory_limit: 1024M
 extensions:
     enabled:
-        - Codeception\Extension\Phantoman
+        - tad\WPBrowser\Extension\Symlinker
     config:
-        Codeception\Extension\Phantoman:
-            path: 'vendor/bin/phantomjs'
-            port: 4444
-            suites: ['phantomjs']
+        tad\WPBrowser\Extension\Symlinker:
+              mode: plugin
+              destination: %WP_ROOT%/wp-content/plugins
 params:
   - .env
