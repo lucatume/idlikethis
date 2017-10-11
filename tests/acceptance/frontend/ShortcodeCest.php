@@ -19,7 +19,8 @@ class ShortcodeCest {
 		$content = 'Lorem ipsum [idlikethis]';
 		$post_id = $I->havePostInDatabase( [ 'post_name' => 'foo', 'post_content' => $content ] );
 
-		$I->amOnPage( '/?p=' . $post_id );
+		$I->amOnPage( '/' );
+//		$I->amOnPage( '/?p=' . $post_id );
 		$text = "I'd like this";
 		$I->seeElement( '.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button' );
 	}
@@ -33,7 +34,8 @@ class ShortcodeCest {
 		$content = 'Lorem ipsum [idlikethis]' . $text . '[/idlikethis]';
 		$post_id = $I->havePostInDatabase( [ 'post_name' => 'foo', 'post_content' => $content ] );
 
-		$I->amOnPage( '/?p=' . $post_id );
+		$I->amOnPage( '/' );
+//		$I->amOnPage( '/?p=' . $post_id );
 		$I->seeElement( '.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button' );
 	}
 }
