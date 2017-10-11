@@ -63,11 +63,21 @@ class idlikethis_Shortcodes_Simple implements idlikethis_Shortcodes_ShortcodeInt
      */
     public function render($attributes = array(), $content = '')
     {
-        $data = $this->template_data;
-        $data['comment_text'] = $this->get_comment_text($attributes, $content);
-        $data['post_id'] = $this->context->get_post_id();
+//        $data = $this->template_data;
+//        $data['comment_text'] = $this->get_comment_text($attributes, $content);
+//        $data['post_id'] = $this->context->get_post_id();
+//
+//        return $this->render_engine->render($this->template_slug, $data);
+        ob_start();
+        ?>
+        <span class="idlikethis-button idlikethis-button--simple" data-post-id="{$post_id}" data-text="{$comment_text}">
+			<button class="idlikethis-button__button">
+				<span class="idlikethis-button__text"><?php echo $this->text_provider->get_button_text() ?></span>
+			</button>
+		</span>
+		<?php
 
-        return $this->render_engine->render($this->template_slug, $data);
+        return ob_get_clean();
     }
 
     /**
