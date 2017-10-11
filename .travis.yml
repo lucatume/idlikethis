@@ -105,6 +105,6 @@ script:
 #  - wp plugin list
 #  - curl wp.localhost
   - codecept run acceptance -vvv
-  - codecept run functional -vvv
-  - codecept run integration
-  - codecept run unit
+#  - codecept run functional -vvv
+#  - codecept run integration
+#  - codecept run unit
