@@ -7,8 +7,8 @@ class ShortcodeCest {
 	public function _before( \AcceptanceTester $I ) {
 		$I->loginAsAdmin();
 		$I->amOnPluginsPage();
-		$I->seePluginInstalled( 'idlikethis' );
-		$I->seePluginActivated( 'idlikethis' );
+		$I->seePluginInstalled( 'id-like-this' );
+		$I->seePluginActivated( 'id-like-this' );
 	}
 
 	/**
@@ -19,8 +19,9 @@ class ShortcodeCest {
 		$content = 'Lorem ipsum [idlikethis]';
 		$post_id = $I->havePostInDatabase( [ 'post_name' => 'foo', 'post_content' => $content ] );
 
-		$I->amOnPage( '/' );
 //		$I->amOnPage( '/?p=' . $post_id );
+				$I->amOnPage( '/' );
+
 		$text = "I'd like this";
 		$I->seeElement( '.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button' );
 	}
@@ -34,8 +35,9 @@ class ShortcodeCest {
 		$content = 'Lorem ipsum [idlikethis]' . $text . '[/idlikethis]';
 		$post_id = $I->havePostInDatabase( [ 'post_name' => 'foo', 'post_content' => $content ] );
 
-		$I->amOnPage( '/' );
 //		$I->amOnPage( '/?p=' . $post_id );
+		$I->amOnPage( '/' );
+
 		$I->seeElement( '.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button' );
 	}
 }
