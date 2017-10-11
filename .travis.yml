@@ -88,8 +88,7 @@ install:
   # get back to the build folder
   - cd $TRAVIS_BUILD_DIR
   # create the cache and compiled folders for smarty
-  - mkdir -p templates/cached && chmod +rwx templates/cached
-  - mkdir -p templates/compiled && chmod +rwx templates/compiled
+  - sudo chmod -R 755 $TRAVIS_BUILD_DIR
   # copy the Nginx configuration file to the available sites
   - sudo cp build/travis-nginx-conf /etc/nginx/sites-available/$WP_DOMAIN
   - sudo sed -e "s?%WP_FOLDER%?$WP_FOLDER?g" --in-place /etc/nginx/sites-available/$WP_DOMAIN
