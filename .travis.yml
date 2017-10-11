@@ -104,11 +104,6 @@ before_script:
   - codecept build
 
 script:
-  - cd $WP_FOLDER
-  - wp post create --post_name=foo --post_type=post --post_title=Shortcode --post_content="Foo [idlikethis] Bar" --post_status=publish
-  - wp plugin list
-  - curl wp.localhost | grep body
-  - cd $TRAVIS_BUILD_DIR
   - codecept run acceptance -vvv
 #  - codecept run functional -vvv
 #  - codecept run integration
