@@ -76,7 +76,8 @@ install:
   # update WordPress database to avoid prompts
   - wp core update-db
   # copy the plugin in the WordPress plugin folder
-  - cp -r $TRAVIS_BUILD_DIR $WP_FOLDER/wp-content/plugins/
+  - ln -s $TRAVIS_BUILD_DIR $WP_FOLDER/wp-content/plugins/idlikethis
+  - ls $WP_FOLDER/wp-content/plugins
   # activate the plugin
   - wp plugin activate idlikethis
   # export a dump of the just installed database to the _data folder
