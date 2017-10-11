@@ -87,7 +87,7 @@ install:
   - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
   # get back to the build folder
   - cd $TRAVIS_BUILD_DIR
-  # open up the site folder to allow the PHP application to read/write
+  # open up the site folder to allow the PHP application to read/write/execute on it
   - sudo chmod -R 777 $WP_FOLDER
   # copy the Nginx configuration file to the available sites
   - sudo cp build/travis-nginx-conf /etc/nginx/sites-available/$WP_DOMAIN
@@ -105,8 +105,7 @@ before_script:
   - codecept build
 
 script:
-  - curl wp.localhost | grep body
-  - codecept run acceptance -vvv
-#  - codecept run functional -vvv
-#  - codecept run integration
-#  - codecept run unit
+  - codecept run acceptance
+  - codecept run functional
+  - codecept run integration
+  - codecept run unit
