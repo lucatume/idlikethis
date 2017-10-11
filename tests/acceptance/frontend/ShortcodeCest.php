@@ -7,7 +7,8 @@ class ShortcodeCest {
 	public function _before( \AcceptanceTester $I ) {
 		$I->loginAsAdmin();
 		$I->amOnPluginsPage();
-		$I->activatePlugin( 'idlikethis' );
+		$I->seePluginInstalled( 'idlikethis' );
+		$I->seePluginActivated( 'idlikethis' );
 	}
 
 	/**
