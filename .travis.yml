@@ -99,11 +99,11 @@ before_script:
   - codecept build
 
 script:
-#  - cd $WP_FOLDER
-#  - wp post create --post_type=post --post_title=Shortcode --post_content="Foo [idlikethis] Bar" --post_status=publish
-#  - wp plugin list
-#  - curl wp.localhost
-  - codecept run acceptance -vvv
-  - codecept run functional -vvv
-  - codecept run integration
-  - codecept run unit
+  - cd $WP_FOLDER
+  - wp post create --post_type=post --post_title=Shortcode --post_content="Foo [idlikethis] Bar" --post_status=publish
+  - wp plugin list
+  - curl wp.localhost
+#  - codecept run acceptance -vvv
+#  - codecept run functional -vvv
+#  - codecept run integration
+#  - codecept run unit
