@@ -71,16 +71,16 @@ install:
   - cd $WP_FOLDER
   - wp core download --version=$WP_VERSION
   - wp config create --dbname="$DB_NAME" --dbuser="root" --dbpass="" --dbhost="127.0.0.1" --dbprefix="$WP_TABLE_PREFIX"
-  - wp core multisite-install --url="$WP_URL" --base="/" --subdomains --title="Test" --admin_user="$WP_ADMIN_USERNAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="admin@$WP_DOMAIN" --skip-email
+  - wp core install --url="$WP_URL" --title="Test" --admin_user="$WP_ADMIN_USERNAME" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="admin@$WP_DOMAIN" --skip-email
   - wp rewrite structure '/%postname%/' --hard
   # update WordPress database to avoid prompts
   - wp core update-db
   # symbolically link the plugin in the WordPress plugin folder
   - ln -s $TRAVIS_BUILD_DIR $WP_FOLDER/wp-content/plugins
   # activate the plugin
-#  - wp plugin activate idlikethis
+  - wp plugin activate idlikethis
   # export a dump of the just installed database to the _data folder
-#  - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
+  - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
   # get back to the build folder
   - cd $TRAVIS_BUILD_DIR
   # copy the Nginx configuration file to the available sites
@@ -99,11 +99,11 @@ before_script:
   - codecept build
 
 script:
-  - cd $WP_FOLDER
-  - wp post create --post_type=post --post_title=Shortcode --post_content="Foo [idlikethis] Bar" --post_status=publish
-  - wp plugin list
-  - curl wp.localhost
-#  - codecept run acceptance -vvv
-#  - codecept run functional -vvv
-#  - codecept run integration
-#  - codecept run unit
+#  - cd $WP_FOLDER
+#  - wp post create --post_type=post --post_title=Shortcode --post_content="Foo [idlikethis] Bar" --post_status=publish
+#  - wp plugin list
+#  - curl wp.localhost
+  - codecept run acceptance -vvv
+  - codecept run functional -vvv
+  - codecept run integration
+  - codecept run unit
