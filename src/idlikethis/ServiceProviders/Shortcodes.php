@@ -9,7 +9,7 @@ class idlikethis_ServiceProviders_Shortcodes extends tad_DI52_ServiceProvider
     public function register()
     {
         $this->container->singleton('idlikethis_Plugin', new idlikethis_Plugin());
-        $templates_dir = $this->container->resolve('idlikethis_Plugin')->dir_path('templates');
+        $templates_dir = dirname(dirname(dirname(dirname(__FILE__)))) .'/templates';
 
         $this->container->singleton('idlikethis_Texts_ShortcodeTextProviderInterface', 'idlikethis_Texts_ShortcodeTextProvider');
 
@@ -26,13 +26,14 @@ class idlikethis_ServiceProviders_Shortcodes extends tad_DI52_ServiceProvider
 
         $simple_shortcode = $this->container->resolve('idlikethis_Shortcodes_ShortcodeInterface');
 
-//        add_shortcode($simple_shortcode->get_tag(), array($simple_shortcode, 'render'));
-	    add_shortcode('idlikethis', array($this, 'render_shortcode'));
+        add_shortcode($simple_shortcode->get_tag(), array($simple_shortcode, 'render'));
+//	    add_shortcode('idlikethis', array($this, 'render_shortcode'));
     }
 
-	public function render_shortcode() {
-		return '<button>' . esc_html( 'I\'d like this' ) . '</button>';
-	}
+//	public function render_shortcode() {
+//		return '<button>' . esc_html( 'I\'d like this' ) . '</button>';
+//	}
+
     /**
      * Binds and sets up implementations at boot time.
      */
