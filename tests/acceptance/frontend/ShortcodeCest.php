@@ -22,8 +22,7 @@ class ShortcodeCest {
 		$I->amOnPage( '/?p=' . $post_id );
 
 		$text = "I'd like this";
-		$I->see('like this');
-//		$I->seeElement( '.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button' );
+		$I->seeElement( '.idlikethis-button[data-post-id="' . $post_id . '"][data-text="' . $text . '"] button' );
 	}
 
 	/**

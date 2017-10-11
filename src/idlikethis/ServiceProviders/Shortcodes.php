@@ -27,12 +27,7 @@ class idlikethis_ServiceProviders_Shortcodes extends tad_DI52_ServiceProvider
         $simple_shortcode = $this->container->resolve('idlikethis_Shortcodes_ShortcodeInterface');
 
         add_shortcode($simple_shortcode->get_tag(), array($simple_shortcode, 'render'));
-//	    add_shortcode('idlikethis', array($this, 'render_shortcode'));
     }
-
-//	public function render_shortcode() {
-//		return '<button>' . esc_html( 'I\'d like this' ) . '</button>';
-//	}
 
     /**
      * Binds and sets up implementations at boot time.
