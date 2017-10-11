@@ -107,7 +107,6 @@ script:
   - wp post create --post_name=foo --post_type=post --post_title=Shortcode --post_content="Foo [idlikethis] Bar" --post_status=publish
   - wp plugin list
   - curl wp.localhost
-  - cat $TRAVIS_BUILD_DIR/tests/_data/dump.sql
 #  - codecept run acceptance -vvv
 #  - codecept run functional -vvv
 #  - codecept run integration
