@@ -87,8 +87,8 @@ install:
   - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
   # get back to the build folder
   - cd $TRAVIS_BUILD_DIR
-  # create the cache and compiled folders for smarty
-  - sudo chmod -R 755 $TRAVIS_BUILD_DIR
+  # open up the site folder to allow the PHP application to read/write
+  - sudo chmod -R 755 $WP_FOLDER
   # copy the Nginx configuration file to the available sites
   - sudo cp build/travis-nginx-conf /etc/nginx/sites-available/$WP_DOMAIN
   - sudo sed -e "s?%WP_FOLDER%?$WP_FOLDER?g" --in-place /etc/nginx/sites-available/$WP_DOMAIN
