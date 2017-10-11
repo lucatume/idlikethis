@@ -12,4 +12,5 @@ node_modules
 tests/_output
 codeception.yml
 .env.local
-templates_c
+templates/cache
+templates/compiled
